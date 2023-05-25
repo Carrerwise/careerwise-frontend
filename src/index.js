@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import WelcomeView from './views/WelcomeView';
+import SignUpForm from './components/SignupForm'
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <WelcomeView />
+    <SignUpForm />
   </React.StrictMode>
 );
 
