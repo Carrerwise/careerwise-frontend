@@ -1,8 +1,10 @@
-import React, {useState} from 'react';
-import '../styles/SignUpForm.css';
-import { Modality } from 'src/enums/Modality';
+import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import { Card, CardHeader, CardBody, CardFooter, Heading } from '@chakra-ui/react';
+
+import '../styles/SignUpForm.css';
+import { Modality } from 'src/enums/Modality';
+import CanMoveSwitch from '../components/CanMoveSwitch'
 
 interface User {
   location: string;
@@ -24,6 +26,8 @@ const SignUpForm: React.FC = () => {
   const handleSubmit = () => {
     console.log(user);
   };
+
+  const [canMove, setCanMove] = useState(false);
 
   return (
     <div className="signup-container">
@@ -74,27 +78,7 @@ const SignUpForm: React.FC = () => {
           </div>
           <div className="form-group">
             <label htmlFor="can_move">¿Tenes la posibilidad de mudarte para realizar tus estudios?</label>
-            <label className="checkbox-label">
-                <input
-                  type="checkbox"
-                  id="can_move"
-                  name="can_move"
-                  value={user.can_move}
-                  onChange={handleChange}
-                />
-                Si
-              </label>
-
-              <label className="checkbox-label">
-                <input
-                  type="checkbox"
-                  id="can_move"
-                  name="can_move"
-                  value={user.can_move}
-                  onChange={handleChange}
-                />
-                No
-              </label>
+            <CanMoveSwitch canMove={canMove} setCanMove={setCanMove} />
           </div>
         </form>
         <CardFooter>
