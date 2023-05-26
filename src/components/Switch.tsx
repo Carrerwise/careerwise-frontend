@@ -2,11 +2,12 @@ import ReactSwitch from 'react-switch';
 import React from 'react';
 
 type SwitchProps = {
-  value: boolean;
-  setValue: (value: boolean) => void;
+    value: boolean;
+    setValue: (value: boolean) => void;
 }
 
 const Switch = ({ value, setValue }: SwitchProps) => {
+
     return (
         <ReactSwitch
             checked={value}

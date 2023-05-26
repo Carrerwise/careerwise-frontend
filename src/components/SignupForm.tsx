@@ -3,29 +3,32 @@ import Button from '@mui/material/Button';
 import { Card, CardHeader, CardBody, CardFooter, Heading } from '@chakra-ui/react';
 
 import '../styles/SignUpForm.css';
-import { Modality } from 'src/enums/Modality';
 import Switch from './Switch'
 import Checkbox from './Checkbox'
-
-interface User {
-  location: string;
-  modality: Modality;
-  can_move: string;
-}
+import { Modality } from 'src/enums/Modality';
+import SignUpInputs from 'src/interfaces/SignUpInputs';
 
 const SignUpForm: React.FC = () => {
-  const [user, setUser] = useState<User>({
+  const [inputs, setInputs] = useState<SignUpInputs>({
     location: '',
     modality: Modality.Remote,
-    can_move: ''
+    canMove: false
   });
 
   const handleChange = (e: any) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
+    setInputs({ ...inputs, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = () => {
-    console.log(user);
+    inputs.canMove = canMove
+    if (remote) {
+      inputs.modality = Modality.Remote
+    } else if (faceToFace) {
+      inputs.modality = Modality.FaceToFace
+    } else {
+      inputs.modality = Modality.Hybrid
+    }
+    console.log('submit:', inputs);
   };
 
   const [canMove, setCanMove] = useState(false);
@@ -41,14 +44,14 @@ const SignUpForm: React.FC = () => {
         </CardHeader>
         <CardBody>
           </CardBody>
-          <form className="signup-form" onSubmit={handleSubmit}>
+          <form className="signup-form">
           <div className="form-group">
             <label htmlFor="location">Ubicación</label>
             <input
               type="text"
               id="location"
               name="location"
-              value={user.location}
+              value={inputs.location}
               onChange={handleChange}
               className="form-control" />
           </div>
@@ -64,7 +67,7 @@ const SignUpForm: React.FC = () => {
           </div>
         </form>
         <CardFooter>
-          <Button color="secondary" variant="contained">Continuar</Button>
+          <Button color="secondary" variant="contained" onClick={handleSubmit}>Continuar</Button>
         </CardFooter>
       </Card>
     </div>
