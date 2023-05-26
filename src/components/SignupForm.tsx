@@ -7,12 +7,22 @@ import Switch from './Switch'
 import Checkbox from './Checkbox'
 import { Modality } from 'src/enums/Modality';
 import SignUpInputs from 'src/interfaces/SignUpInputs';
+import { StudiesType } from 'src/enums/StudiesType';
 
 const SignUpForm: React.FC = () => {
+  const [canMove, setCanMove] = useState(false);
+  const [remote, setRemote] = useState(false);
+  const [faceToFace, setFaceToFace] = useState(false);
+  const [hybrid, setHybrid] = useState(false);
+  const [university, setUniversity] = useState(false);
+  const [tertiary, setTertiary] = useState(false);
+  const [course, setCourse] = useState(false);
+
   const [inputs, setInputs] = useState<SignUpInputs>({
     location: '',
     modality: Modality.Remote,
-    canMove: false
+    canMove: false,
+    studiesType: StudiesType.University
   });
 
   const handleChange = (e: any) => {
@@ -20,7 +30,6 @@ const SignUpForm: React.FC = () => {
   };
 
   const handleSubmit = () => {
-    inputs.canMove = canMove
     if (remote) {
       inputs.modality = Modality.Remote
     } else if (faceToFace) {
@@ -28,13 +37,16 @@ const SignUpForm: React.FC = () => {
     } else {
       inputs.modality = Modality.Hybrid
     }
+    inputs.canMove = canMove
+    if (university) {
+      inputs.studiesType = StudiesType.University
+    } else if (tertiary) {
+      inputs.studiesType = StudiesType.Tertiary
+    } else {
+      inputs.studiesType = StudiesType.Course
+    }
     console.log('submit:', inputs);
   };
-
-  const [canMove, setCanMove] = useState(false);
-  const [remote, setRemote] = useState(false);
-  const [faceToFace, setFaceToFace] = useState(false);
-  const [hybrid, setHybrid] = useState(false);
 
   return (
     <div className="signup-container">
@@ -62,8 +74,14 @@ const SignUpForm: React.FC = () => {
             <Checkbox label="Hibrido" value={hybrid} setValue={setHybrid} />
           </div>
           <div className="form-group">
-            <label htmlFor="can_move">¿Tenes la posibilidad de mudarte para realizar tus estudios?</label>
+            <label htmlFor="canMove">¿Tenes la posibilidad de mudarte para realizar tus estudios?</label>
             <Switch value={canMove} setValue={setCanMove} />
+          </div>
+          <div className="form-group">
+            <label htmlFor="studiesType">¿Qué tipo de estudios estás buscando?</label>
+            <Checkbox label="Universitario" value={university} setValue={setUniversity} />
+            <Checkbox label="Terciario" value={tertiary} setValue={setTertiary} />
+            <Checkbox label="Curso" value={course} setValue={setCourse} />
           </div>
         </form>
         <CardFooter>
