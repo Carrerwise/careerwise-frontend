@@ -4,7 +4,8 @@ import { Card, CardHeader, CardBody, CardFooter, Heading } from '@chakra-ui/reac
 
 import '../styles/SignUpForm.css';
 import { Modality } from 'src/enums/Modality';
-import CanMoveSwitch from '../components/CanMoveSwitch'
+import Switch from './Switch'
+import Checkbox from './Checkbox'
 
 interface User {
   location: string;
@@ -28,6 +29,9 @@ const SignUpForm: React.FC = () => {
   };
 
   const [canMove, setCanMove] = useState(false);
+  const [remote, setRemote] = useState(false);
+  const [faceToFace, setFaceToFace] = useState(false);
+  const [hybrid, setHybrid] = useState(false);
 
   return (
     <div className="signup-container">
@@ -50,35 +54,13 @@ const SignUpForm: React.FC = () => {
           </div>
           <div className="form-group">
             <label htmlFor="modality">Modalidad de estudio</label>
-                <label className="checkbox-label">
-                <input
-                  type="checkbox"
-                  value={user.modality}
-                  onChange={handleChange}
-                />
-                Remoto
-                </label>
-              <label className="checkbox-label">
-                <input
-                  type="checkbox"
-                  value={user.modality}
-                  onChange={handleChange}
-                />
-                Presencial
-              </label>
-
-              <label className="checkbox-label">
-                <input
-                  type="checkbox"
-                  value={user.modality}
-                  onChange={handleChange}
-                />
-                Hibrido
-              </label>
+            <Checkbox label="Remoto" value={remote} setValue={setRemote} />
+            <Checkbox label="Presencial" value={faceToFace} setValue={setFaceToFace} />
+            <Checkbox label="Hibrido" value={hybrid} setValue={setHybrid} />
           </div>
           <div className="form-group">
             <label htmlFor="can_move">¿Tenes la posibilidad de mudarte para realizar tus estudios?</label>
-            <CanMoveSwitch canMove={canMove} setCanMove={setCanMove} />
+            <Switch value={canMove} setValue={setCanMove} />
           </div>
         </form>
         <CardFooter>

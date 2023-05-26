@@ -24,12 +24,8 @@ label {
 .form-control {
     width: 100%;
     padding: 8px;
-    border: 1px solid #ccc;
+    border: 1px solid #939191;
     border-radius: 3px;
-}
-
-.checkbox-label {
-    font-size: small;
 }
 
 @media (max-width: 600px) {

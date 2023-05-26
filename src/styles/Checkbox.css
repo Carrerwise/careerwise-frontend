@@ -1,0 +1,14 @@
+.checkbox-label {
+    display: inline-flex;
+    align-items: center;
+    font-size: small;
+  }
+  
+.checkbox-label input[type='checkbox'] {
+    width: 18px;
+    height: 18px;
+    border: 1px solid #5c5c5c; 
+    border-radius: 3px;
+    outline: none;
+    margin-right: 8px;
+}
