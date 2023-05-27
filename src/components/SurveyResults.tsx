@@ -1,5 +1,7 @@
 import React from 'react';
+import { Box, Text, Stack, Heading, Grid, GridItem, Center } from '@chakra-ui/react';
 import { SurveyData } from 'src/interfaces/SurveyData';
+import '../styles/SurveyResults.css';
 
 interface SurveyResultsProps {
   data: SurveyData[];
@@ -7,18 +9,28 @@ interface SurveyResultsProps {
 
 const SurveyResults: React.FC<SurveyResultsProps> = ({ data }) => {
     return (
-        <div>
+        <Stack spacing={4}>
           {data.map((survey, index) => (
-            <div key={index}>
-              <h3>{survey.career}</h3>
-              <ul>
+            <Box key={index} className="resultItem" _hover={{
+              background: "#dcdcdc",
+              cursor: "pointer"
+            }}
+            >
+              <Heading as="h3" size="lg" mb={2} fontWeight={"normal"} color={"#565656"}>
+                {survey.career}
+              </Heading>
+              <Grid >
                 {survey.options.map((option, optionIndex) => (
-                  <li key={optionIndex}>{option.institution}</li>
+                  <GridItem key={optionIndex}>
+                    <Center p={2} bg="gray.200" borderRadius="md">
+                      <Text>{option.institution}</Text>
+                    </Center>
+                  </GridItem>
                 ))}
-              </ul>
-            </div>
+              </Grid>
+            </Box>
           ))}
-        </div>
+        </Stack>
       );
 };
 

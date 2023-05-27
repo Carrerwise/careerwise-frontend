@@ -1,0 +1,19 @@
+h1 {
+  font-size: 30px;
+  color: #0c0c0c;
+  margin-bottom: 30px;
+}
+
+p {
+  font-size: 14px;
+  margin-bottom: 30px;
+  color: #4f4d4f;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 5px;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}

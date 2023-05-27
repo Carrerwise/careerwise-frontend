@@ -5,6 +5,7 @@ import { Card, CardHeader, CardBody, CardFooter, Heading, Text } from '@chakra-u
 
 import '../styles/WelcomeView.css';
 import Header from '../components/Header';
+import '../styles/Global.css'
 
 const WelcomeView: React.FC = () => {
   const navigate = useNavigate();

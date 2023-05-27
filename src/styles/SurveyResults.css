@@ -1,0 +1,12 @@
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+.resultItem {
+    border-radius: 20px;
+    border-width: 2px;
+    color: rgb(103, 103, 103);
+    background: -webkit-linear-gradient(45deg, #fafafa, #f3f3f3);
+    width: 500px;
+    padding: 20px;
+}
