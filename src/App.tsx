@@ -11,6 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<WelcomeView />} />
         <Route path="/signup" element={<SignUpForm />} />
+        <Route path="/results" element={<SurveyView />} />
       </Routes>
     </Router>
   );
