@@ -12,11 +12,11 @@ const SurveyResults: React.FC<SurveyResultsProps> = ({ data }) => {
         <Stack spacing={4}>
           {data.map((survey, index) => (
             <Box key={index} className="resultItem" _hover={{
-              background: "#dcdcdc",
+              background: "#ededed",
               cursor: "pointer"
             }}
             >
-              <Heading as="h3" size="lg" mb={2} fontWeight={"normal"} color={"#565656"}>
+              <Heading as="h3" size="lg" mb={2} fontWeight={"normal"} color={"#373030"}>
                 {survey.career}
               </Heading>
               <Grid >

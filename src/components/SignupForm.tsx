@@ -50,9 +50,9 @@ const SignUpForm: React.FC = () => {
 
   return (
     <div className="signup-container">
-      <Card align="center" className="main-card">
+      <Card align="center" className="form-card">
         <CardHeader>
-          <Heading>Preguntas personales</Heading>
+          <Heading className="form-title">Preguntas personales</Heading>
         </CardHeader>
         <CardBody>
           </CardBody>

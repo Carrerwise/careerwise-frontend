@@ -1,7 +1,9 @@
 h1 {
+  background: linear-gradient(to bottom, #333333, #636363);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 30px;
   font-size: 30px;
-  color: #0c0c0c;
-  margin-bottom: 30px;
 }
 
 p {
@@ -16,4 +18,5 @@ p {
   display: grid;
   align-items: center;
   justify-items: center;
+  background: linear-gradient(to bottom, #f9f8f8, #e2e1e1);
 }

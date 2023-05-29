@@ -2,6 +2,10 @@
   font-family: 'Roboto', sans-serif;
 }
 
+.welcome-container {
+  height: 600px;
+}
+
 .welcome-view {
   max-width: 600px;
   margin: 0 auto;
@@ -12,9 +16,18 @@
   align-items: center;
 }
 
+.welcome-title {
+  margin: 70px;
+  color: #2b2a2a;
+  background: linear-gradient(to bottom, #303030, #941f90);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 35px;
+}
+
 .main-card {
+  background: linear-gradient(to bottom, #efeeee, #f8f7f7);
   border-radius: 20px;
-  background: -webkit-linear-gradient(45deg, #fafafa, #f3f3f3);
   padding: 15px;
   height: 100%;
   width: 40%;
