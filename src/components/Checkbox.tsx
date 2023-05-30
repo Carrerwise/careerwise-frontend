@@ -1,26 +1,38 @@
 import React from 'react';
-import '../styles/Checkbox.css'
+import '../styles/Form.css';
 
-interface CheckboxProps {
-  label: string;
-  value: string;
-  setValue: (value: string) => void;
+type CheckboxProps = {
+  labels: Array<string>;
+  values: Array<string>;
+  setValues: (values: Array<string>) => void;
 }
 
-const Checkbox: React.FC<CheckboxProps> = ({ label, value, setValue }: CheckboxProps) => {
-  
+const Checkbox: React.FC<CheckboxProps> = ({ labels, values, setValues}) => {
+
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { checked } = event.target;
-    const newValue = checked ? label : '';
-    setValue(newValue);
+    const { value, checked } = event.target;
+    if (checked) {
+      setValues([...values, value]);
+    } else {
+      setValues(values.filter((option) => option !== value));
+    }
   };
 
   return (
-    <div>
-      <label className={`checkbox-label ${value ? 'checked' : ''}`}>
-        <input type="checkbox" onChange={handleCheckboxChange} />
+    <div className="form-group">
+    {labels.map((label) => (
+      <div key={label}>
+        <label className='checkbox-label'>
+          <input
+            type="checkbox"
+            value={label}
+            checked={values.includes(label)}
+            onChange={handleCheckboxChange}
+          />
         {label}
-      </label>
+        </label>
+      </div>
+    ))}
     </div>
   );
 };

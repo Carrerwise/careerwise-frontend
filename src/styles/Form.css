@@ -49,6 +49,12 @@ label {
     border-radius: 3px;
 }
 
+.checkbox-label {
+    display: block;
+    color: #737272;
+    font-size: small;
+}
+
 @media (max-width: 600px) {
     .form {
         max-width: 100%;

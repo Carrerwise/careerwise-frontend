@@ -24,7 +24,7 @@ const Test: React.FC<TestProps> = ({ questions, answers, setAnswers }) => {
                 <TestSwitch answers={answers} idx={idx} onAnswerUpdate={handleAnswerUpdate} />
             </div>
       ))}
-    </div>
+      </div>
   );
 };
 

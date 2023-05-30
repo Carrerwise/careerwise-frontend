@@ -10,8 +10,8 @@ import '../styles/Form.css';
 
 const SignUpForm: React.FC = () => {
   const [canMove, setCanMove] = useState(false);
-  const [modality, setModality] = useState<string>('');
-  const [studiesType, setStudiesType] = useState<string>('');
+  const [studiesType, setStudiesType] = useState<string[]>([]);
+  const [modality, setModality] = useState<string[]>([]);
 
   const [inputs, setInputs] = useState<SignUpInputs>({
     location: '',
@@ -27,10 +27,10 @@ const SignUpForm: React.FC = () => {
 
   const handleSubmit = () => {
     inputs.canMove = canMove;
-    inputs.modality = modality;
-    inputs.studiesType = studiesType;
+    inputs.modality = modality[0];
+    inputs.studiesType = studiesType[0]
     console.log('signUp:', inputs);
-    //navigate('/test')
+    navigate('/test')
   };
 
   return (
@@ -54,9 +54,7 @@ const SignUpForm: React.FC = () => {
           </div>
           <div className="form-group">
             <label htmlFor="modality">Modalidad de estudio</label>
-            <Checkbox label="Remoto" value={modality} setValue={setModality} />
-            <Checkbox label="Presencial" value={modality} setValue={setModality} />
-            <Checkbox label="Hibrido" value={modality} setValue={setModality} />
+            <Checkbox labels={['Remoto','Presencial','Hibrido']} values={modality} setValues={setModality} />
           </div>
           <div className="form-group">
             <label htmlFor="canMove">¿Tenes la posibilidad de mudarte para realizar tus estudios?</label>
@@ -64,9 +62,7 @@ const SignUpForm: React.FC = () => {
           </div>
           <div className="form-group">
             <label htmlFor="studiesType">¿Qué tipo de estudios estás buscando?</label>
-            <Checkbox label="Universitario" value={studiesType} setValue={setStudiesType} />
-            <Checkbox label="Terciario" value={studiesType} setValue={setStudiesType} />
-            <Checkbox label="Curso" value={studiesType} setValue={setStudiesType} />
+            <Checkbox labels={['Universitario','Terciario','Curso']} values={studiesType} setValues={setStudiesType} />
           </div>
         </form>
         <CardFooter>

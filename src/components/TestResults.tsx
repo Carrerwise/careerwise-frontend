@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Text, Stack, Heading, Grid, GridItem, Center } from '@chakra-ui/react';
-import { SurveyData } from 'src/interfaces/SurveyData';
+import { SurveyData } from 'src/interfaces/ResultData';
 import '../styles/SurveyResults.css';
 
 interface SurveyResultsProps {
