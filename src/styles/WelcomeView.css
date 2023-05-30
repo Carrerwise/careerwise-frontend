@@ -4,6 +4,7 @@
 
 .welcome-container {
   height: 600px;
+  background: linear-gradient(to bottom, #efeded, #e4e2e2);
 }
 
 .welcome-view {
@@ -26,7 +27,7 @@
 }
 
 .main-card {
-  background: linear-gradient(to bottom, #efeeee, #f8f7f7);
+  background: linear-gradient(to bottom, #f9f7f7,#efeeee);
   border-radius: 20px;
   padding: 15px;
   height: 100%;

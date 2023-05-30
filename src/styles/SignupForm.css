@@ -5,6 +5,7 @@
     align-content: center;
     justify-items: center;
     height: 700px;
+    background: linear-gradient(to bottom, #f5f4f4, #fcfcfc);
 }
 
 .form-title {
@@ -17,7 +18,7 @@
 .form-card {
     border-radius: 10px;
     padding: 15px;
-    background: linear-gradient(to bottom, #f3f3f3, #ececec);
+    background: linear-gradient(to bottom, #eceaea,#e6e4e4);
 }
   
 .form-group {
