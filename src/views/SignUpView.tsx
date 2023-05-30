@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import { Card, CardHeader, CardBody, CardFooter, Heading } from '@chakra-ui/react';
+import { useNavigate } from 'react-router';
 
-import '../styles/Form.css';
-import Switch from './Switch'
-import Checkbox from './Checkbox'
+import Switch from '../components/Switch'
+import Checkbox from '../components/Checkbox'
 import { Modality } from 'src/enums/Modality';
-import SignUpInputs from 'src/interfaces/SignUpInputs';
 import { StudiesType } from 'src/enums/StudiesType';
+import SignUpInputs from 'src/interfaces/SignUpInputs';
+import '../styles/Form.css';
 
 const SignUpForm: React.FC = () => {
   const [canMove, setCanMove] = useState(false);
@@ -24,6 +25,7 @@ const SignUpForm: React.FC = () => {
     canMove: false,
     studiesType: StudiesType.University
   });
+  const navigate = useNavigate();
 
   const handleChange = (e: any) => {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
@@ -45,7 +47,8 @@ const SignUpForm: React.FC = () => {
     } else {
       inputs.studiesType = StudiesType.Course
     }
-    console.log('submit:', inputs);
+    console.log('signUp:', inputs);
+    navigate('/test')
   };
 
   return (

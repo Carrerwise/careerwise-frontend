@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Button from '@mui/material/Button';
 import { Card, CardHeader, CardBody, CardFooter, Heading } from '@chakra-ui/react';
+import { useNavigate } from 'react-router';
 
 import Test from '../components/Test';
 import '../styles/Form.css';
-import { useNavigate } from 'react-router';
 
 const TestView: React.FC = () => {
     const [questions, setQuestions] = useState([]);

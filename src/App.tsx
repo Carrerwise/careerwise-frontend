@@ -2,8 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import WelcomeView from './views/WelcomeView';
-import SignUpForm from './components/SignupForm';
-import SurveyView from './views/SurveyView';
+import SignUpForm from './views/SignUpView';
+import SurveyView from './views/TestResultsView';
 import TestView from './views/TestView';
 
 function App() {

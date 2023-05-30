@@ -1,6 +1,6 @@
 import React from 'react';
 
-import SurveyResults from '../components/SurveyResults';
+import SurveyResults from '../components/TestResults';
 import { SurveyData } from 'src/interfaces/SurveyData';
 import '../styles/Global.css'
 
@@ -30,7 +30,7 @@ const SurveyView: React.FC = () => {
     
       return (
         <div className='container'>
-          <h1>Resultados de la encuesta</h1>
+          <h1>Resultados</h1>
           <SurveyResults data={surveyData} />
         </div>
       );
