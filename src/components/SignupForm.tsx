@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import { Card, CardHeader, CardBody, CardFooter, Heading } from '@chakra-ui/react';
 
-import '../styles/SignUpForm.css';
+import '../styles/Form.css';
 import Switch from './Switch'
 import Checkbox from './Checkbox'
 import { Modality } from 'src/enums/Modality';
@@ -56,7 +56,7 @@ const SignUpForm: React.FC = () => {
         </CardHeader>
         <CardBody>
           </CardBody>
-          <form className="signup-form">
+          <form className="form">
           <div className="form-group">
             <label htmlFor="location">Ubicación</label>
             <input

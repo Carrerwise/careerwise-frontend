@@ -7,7 +7,6 @@ type SwitchProps = {
 }
 
 const Switch = ({ value, setValue }: SwitchProps) => {
-
     return (
         <ReactSwitch
             checked={value}
