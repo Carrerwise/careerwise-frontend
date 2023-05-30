@@ -5,25 +5,19 @@ import { useNavigate } from 'react-router';
 
 import Switch from '../components/Switch'
 import Checkbox from '../components/Checkbox'
-import { Modality } from 'src/enums/Modality';
-import { StudiesType } from 'src/enums/StudiesType';
 import SignUpInputs from 'src/interfaces/SignUpInputs';
 import '../styles/Form.css';
 
 const SignUpForm: React.FC = () => {
   const [canMove, setCanMove] = useState(false);
-  const [remote, setRemote] = useState(false);
-  const [faceToFace, setFaceToFace] = useState(false);
-  const [hybrid, setHybrid] = useState(false);
-  const [university, setUniversity] = useState(false);
-  const [tertiary, setTertiary] = useState(false);
-  const [course, setCourse] = useState(false);
+  const [modality, setModality] = useState<string>('');
+  const [studiesType, setStudiesType] = useState<string>('');
 
   const [inputs, setInputs] = useState<SignUpInputs>({
     location: '',
-    modality: Modality.Remote,
+    modality: '',
     canMove: false,
-    studiesType: StudiesType.University
+    studiesType: ''
   });
   const navigate = useNavigate();
 
@@ -32,23 +26,11 @@ const SignUpForm: React.FC = () => {
   };
 
   const handleSubmit = () => {
-    if (remote) {
-      inputs.modality = Modality.Remote
-    } else if (faceToFace) {
-      inputs.modality = Modality.FaceToFace
-    } else {
-      inputs.modality = Modality.Hybrid
-    }
-    inputs.canMove = canMove
-    if (university) {
-      inputs.studiesType = StudiesType.University
-    } else if (tertiary) {
-      inputs.studiesType = StudiesType.Tertiary
-    } else {
-      inputs.studiesType = StudiesType.Course
-    }
+    inputs.canMove = canMove;
+    inputs.modality = modality;
+    inputs.studiesType = studiesType;
     console.log('signUp:', inputs);
-    navigate('/test')
+    //navigate('/test')
   };
 
   return (
@@ -72,9 +54,9 @@ const SignUpForm: React.FC = () => {
           </div>
           <div className="form-group">
             <label htmlFor="modality">Modalidad de estudio</label>
-            <Checkbox label="Remoto" value={remote} setValue={setRemote} />
-            <Checkbox label="Presencial" value={faceToFace} setValue={setFaceToFace} />
-            <Checkbox label="Hibrido" value={hybrid} setValue={setHybrid} />
+            <Checkbox label="Remoto" value={modality} setValue={setModality} />
+            <Checkbox label="Presencial" value={modality} setValue={setModality} />
+            <Checkbox label="Hibrido" value={modality} setValue={setModality} />
           </div>
           <div className="form-group">
             <label htmlFor="canMove">¿Tenes la posibilidad de mudarte para realizar tus estudios?</label>
@@ -82,9 +64,9 @@ const SignUpForm: React.FC = () => {
           </div>
           <div className="form-group">
             <label htmlFor="studiesType">¿Qué tipo de estudios estás buscando?</label>
-            <Checkbox label="Universitario" value={university} setValue={setUniversity} />
-            <Checkbox label="Terciario" value={tertiary} setValue={setTertiary} />
-            <Checkbox label="Curso" value={course} setValue={setCourse} />
+            <Checkbox label="Universitario" value={studiesType} setValue={setStudiesType} />
+            <Checkbox label="Terciario" value={studiesType} setValue={setStudiesType} />
+            <Checkbox label="Curso" value={studiesType} setValue={setStudiesType} />
           </div>
         </form>
         <CardFooter>

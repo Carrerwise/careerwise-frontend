@@ -1,9 +1,6 @@
-import { Modality } from 'src/enums/Modality';
-import { StudiesType } from 'src/enums/StudiesType';
-
 export default interface SignUpInputs {
     location: string;
-    modality: Modality;
+    modality: string;
     canMove: boolean;
-    studiesType: StudiesType
+    studiesType: string
 }
