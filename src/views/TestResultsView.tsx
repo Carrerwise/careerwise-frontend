@@ -1,37 +1,35 @@
 import React from 'react';
 
-import SurveyResults from '../components/TestResults';
-import { SurveyData } from '../interfaces/ResultData';
+import TestResult from '../components/TestResults';
+import ResultData from '../interfaces/ResultData';
 import '../styles/Global.css'
 
 const SurveyView: React.FC = () => {
-    const surveyData: SurveyData[] = [
+    const surveyData: ResultData[] = [
         {
-          career: 'Carrera 1',
-          options: [
+          aptitudes: [
+            { aptitude: 'Aptitud 1' },
+            { aptitude: 'Aptitud 1' },
+          ],
+          interests: [
+            { interest: 'Interes 1' },
+            { interest: 'Interes 1' },
+          ],
+          careers: [
+            { career: 'Carrera 1' },
+            { career: 'Carrera 2' }, 
+          ],
+          institutions: [
             { institution: 'Universidad 1' },
-            { institution: 'Universidad 2' },
-          ],
+            { institution: 'Universidad 2' }, 
+          ]
         },
-        {
-          career: 'Carrera 2',
-          options: [
-            { institution: 'Universidad 3' },
-            { institution: 'Universidad 4' },
-          ],
-      },
-      {
-        career: 'Carrera 3',
-        options: [
-          { institution: 'Universidad 1' },
-        ],
-      },
       ];
     
       return (
         <div className='container'>
           <h1>Resultados</h1>
-          <SurveyResults data={surveyData} />
+          <TestResult data={surveyData} />
         </div>
       );
 };
