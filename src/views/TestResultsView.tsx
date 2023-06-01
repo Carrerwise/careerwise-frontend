@@ -1,7 +1,7 @@
 import React from 'react';
 
 import SurveyResults from '../components/TestResults';
-import { SurveyData } from 'src/interfaces/ResultData';
+import { SurveyData } from '../interfaces/ResultData';
 import '../styles/Global.css'
 
 const SurveyView: React.FC = () => {

@@ -12,8 +12,10 @@
     font-family: 'Roboto', sans-serif,
     monospace;
     display: grid;
-    align-items: center;
-    justify-items: center;
+    align-content: center;
+    justify-content: center;
+    margin: 30px;
+
 }
 
 .form-title {
@@ -28,12 +30,19 @@
     padding: 15px;
     background: linear-gradient(to bottom, #eceaea,#e6e4e4);
 }
+
+.test-form-card {
+    border-radius: 10px;
+    background: linear-gradient(to bottom, #eceaea,#e6e4e4);
+    width: 700px;
+    height: 670px;
+    padding: 20px;
+}
   
 .form-group {
    padding: 13px;
    display: grid;
    align-items: center;
-   justify-items: left;
 }
   
 label {
@@ -54,6 +63,20 @@ label {
     color: #737272;
     font-size: small;
 }
+
+.test-pagination {
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.questions-container {
+    display: grid;
+    height: 500px;
+    width: 650px;
+}
+  
 
 @media (max-width: 600px) {
     .form {

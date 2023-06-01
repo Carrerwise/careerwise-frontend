@@ -33,12 +33,12 @@ const TestView: React.FC = () => {
 
     return (
         <div className="test-container">
-        <Card align="center" className="form-card">
+        <Card align="center" className="test-form-card">
           <CardHeader>
             <Heading className="form-title">Test vocacional</Heading>
           </CardHeader>
           <CardBody>
-                <Test questions={questions} answers={answers} setAnswers={setAnswers} />
+            <Test questions={questions} answers={answers} setAnswers={setAnswers} />
           </CardBody>
           <CardFooter>
             <Button color="secondary" variant="contained" onClick={handleSubmit}>Finalizar</Button>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Text, Stack, Heading, Grid, GridItem, Center } from '@chakra-ui/react';
-import { SurveyData } from 'src/interfaces/ResultData';
+import { SurveyData } from '../interfaces/ResultData';
 import '../styles/SurveyResults.css';
 
 interface SurveyResultsProps {
@@ -20,7 +20,7 @@ const SurveyResults: React.FC<SurveyResultsProps> = ({ data }) => {
                 {survey.career}
               </Heading>
               <Grid >
-                {survey.options.map((option, optionIndex) => (
+                {survey.options.map((option: { institution: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactFragment | React.ReactPortal | null | undefined; }, optionIndex: React.Key | null | undefined) => (
                   <GridItem key={optionIndex}>
                     <Center p={2} bg="gray.200" borderRadius="md">
                       <Text>{option.institution}</Text>

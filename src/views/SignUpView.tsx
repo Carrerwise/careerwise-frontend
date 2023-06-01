@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router';
 
 import Switch from '../components/Switch'
 import Checkbox from '../components/Checkbox'
-import SignUpInputs from 'src/interfaces/SignUpInputs';
+import SignUpInputs from '../interfaces/SignUpInputs';
 import '../styles/Form.css';
 
 const SignUpForm: React.FC = () => {
