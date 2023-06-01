@@ -35,7 +35,7 @@ const Test: React.FC<TestProps> = ({ questions, answers, setAnswers }) => {
       <div className='questions-container'>
         {displayedData.map((question, idx) => (
           <div key={question.id}>
-            <label>{question.text}</label>
+            <label className='test-label'>{question.text}</label>
             <TestSwitch answers={answers} idx={idx} onAnswerUpdate={handleAnswerUpdate} />
           </div>
         ))}
