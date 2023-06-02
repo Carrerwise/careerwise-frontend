@@ -2,19 +2,22 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import { Card, CardHeader, CardBody, CardFooter, Heading, Text } from '@chakra-ui/react';
+import { Fade } from 'react-awesome-reveal';
 
 import '../styles/WelcomeView.css';
 import '../styles/Global.css'
-import BackgroundAnimation from '../components/BackgroundAnimation';
+import AnimatedBackground from '../components/AnimatedBackground';
 
 const WelcomeView: React.FC = () => {
   const navigate = useNavigate();
 
   return (
     <div className="welcome-container">
-      <BackgroundAnimation />
+      <AnimatedBackground />
       <div className="welcome-view">
-        <h1 className="welcome-title">Bienvenido a Careerwise</h1>
+        <Fade>
+          <h1 className="welcome-title">Bienvenido a Careerwise</h1>
+        </Fade>
         <Card align="center" className="main-card">
           <CardHeader>
             <Heading as="h3" mb={6}> Test vocacional</Heading>
