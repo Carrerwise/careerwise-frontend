@@ -10,8 +10,6 @@ const Switch = ({ value, setValue }: SwitchProps) => {
     return (
         <ReactSwitch
             checked={value}
-            onColor="#2cbe97"
-            offColor="#c63530"
             onChange={() => setValue(!value)}
             className="can-move-switch"
         />

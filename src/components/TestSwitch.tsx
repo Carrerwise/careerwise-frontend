@@ -16,8 +16,6 @@ const TestSwitch = ({ answers, idx, onAnswerUpdate }: TestSwitchProps) => {
     return (
         <ReactSwitch
             checked={answers[idx]}
-            onColor="#2cbe97"
-            offColor="#c63530"
             onChange={handleOnChange}
             className="can-move-switch"
         />

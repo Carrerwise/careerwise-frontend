@@ -13,7 +13,7 @@ const ResultItem = ({ idx, prop, label }: ResultItemProps) => {
             background: "#ededed",
             }}
         >
-            <Heading as="h3" size="lg" mb={2} fontWeight={"normal"} color={"#373030"}>
+            <Heading as="h3" size="lg" mb={2} fontWeight={"normal"} color={"#3c3b3d"}>
               {label}
             </Heading>
             <Grid>
