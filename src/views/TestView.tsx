@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 import Button from '@mui/material/Button';
 import { Card, CardHeader, CardBody, CardFooter, Heading } from '@chakra-ui/react';
 import { useNavigate } from 'react-router';
@@ -25,11 +25,26 @@ const TestView: React.FC = () => {
       getQuestions()
     }, []);
   
-    const handleSubmit = () => {
+  const handleSubmit = async () => {
+    try {
       console.log('Submit test')
-      console.log(answers)
-      navigate('/results')
+      for (var i = 0; i < answers.length; i++) {
+        const requestData: AxiosRequestConfig<any> = {
+          method: 'POST',
+          url: 'https://careerwise.crossnox.dev/users/1/replies',
+          data: {
+            question_id: 0,
+            reply: answers[0],
+          },
+        };
+        //const resp = await axios(requestData)
+        //console.log(resp)
+        navigate('/results')
+      }
+    } catch (err) {
+        console.error(err)
     }
+  }
 
     return (
         <div className="test-container">

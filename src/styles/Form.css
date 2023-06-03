@@ -5,7 +5,10 @@
     align-content: center;
     justify-items: center;
     height: 700px;
-    background: linear-gradient(to bottom, #f5f4f4, #fcfcfc);
+    background: linear-gradient(to bottom, #d1cfcf, #6c3e72);
+    width: 100%;
+    height: 100%;
+    padding: 15px;
 }
 
 .test-container {
@@ -14,8 +17,10 @@
     display: grid;
     align-content: center;
     justify-content: center;
-    margin: 30px;
-    background: linear-gradient(to bottom, #f5f4f4, #fcfcfc);
+    background: linear-gradient(to bottom, #d1cfcf, #6c3e72);
+    width: 100%;
+    height: 100%;
+    padding: 15px;
 }
 
 .form-title {

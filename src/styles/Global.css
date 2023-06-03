@@ -18,5 +18,8 @@ p {
   display: grid;
   align-items: center;
   justify-items: center;
-  background: linear-gradient(to bottom, #f9f8f8, #e2e1e1);
+  background: linear-gradient(to bottom, #d1cfcf, #6c3e72);
+  width: 100%;
+  height: 100%;
+  padding: 15px;
 }
