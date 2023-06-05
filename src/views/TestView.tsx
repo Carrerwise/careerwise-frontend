@@ -33,12 +33,12 @@ const TestView: React.FC = () => {
           method: 'POST',
           url: 'https://careerwise.crossnox.dev/users/1/replies',
           data: {
-            question_id: 0,
-            reply: answers[0],
+            question_id: i+1,
+            reply: answers[i],
           },
         };
-        //const resp = await axios(requestData)
-        //console.log(resp)
+        const resp = await axios(requestData)
+        console.log(resp)
         navigate('/results')
       }
     } catch (err) {
