@@ -7,6 +7,7 @@ import Switch from '../components/Switch'
 import Checkbox from '../components/Checkbox'
 import SignUpInputs from '../interfaces/SignUpInputs';
 import '../styles/Form.css';
+import { Header } from '../components/Header';
 
 const SignUpForm: React.FC = () => {
   const [canMove, setCanMove] = useState(false);
@@ -34,14 +35,14 @@ const SignUpForm: React.FC = () => {
   };
 
   return (
-    <div className="signup-container">
+    <><Header /><div className="signup-container">
       <Card align="center" className="form-card">
         <CardHeader>
           <Heading className="form-title">Preguntas personales</Heading>
         </CardHeader>
         <CardBody>
-          </CardBody>
-          <form className="form">
+        </CardBody>
+        <form className="form">
           <div className="form-group">
             <label htmlFor="location">Ubicación</label>
             <input
@@ -54,7 +55,7 @@ const SignUpForm: React.FC = () => {
           </div>
           <div className="form-group">
             <label htmlFor="modality">Modalidad de estudio</label>
-            <Checkbox labels={['Remoto','Presencial','Hibrido']} values={modality} setValues={setModality} />
+            <Checkbox labels={['Remoto', 'Presencial', 'Hibrido']} values={modality} setValues={setModality} />
           </div>
           <div className="form-group">
             <label htmlFor="canMove">¿Tenes la posibilidad de mudarte para realizar tus estudios?</label>
@@ -62,14 +63,14 @@ const SignUpForm: React.FC = () => {
           </div>
           <div className="form-group">
             <label htmlFor="studiesType">¿Qué tipo de estudios estás buscando?</label>
-            <Checkbox labels={['Universitario','Terciario','Curso']} values={studiesType} setValues={setStudiesType} />
+            <Checkbox labels={['Universitario', 'Terciario', 'Curso']} values={studiesType} setValues={setStudiesType} />
           </div>
         </form>
         <CardFooter>
           <Button color="secondary" variant="contained" onClick={handleSubmit}>Continuar</Button>
         </CardFooter>
       </Card>
-    </div>
+    </div></>
   );
 };
 

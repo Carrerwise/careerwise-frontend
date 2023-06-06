@@ -1,0 +1,24 @@
+.header_container {
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 1400px;
+  height: 100px;
+  margin: 0;
+  background: linear-gradient(to bottom, #e1e0e0,#c3bac3);
+  border-bottom: 2px solid #e1e0e0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 10;
+
+  h1 {
+    background: linear-gradient(to bottom, #303030, #941f90);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+    padding: 12px 24px;
+    font-size: 28px;
+  }
+}

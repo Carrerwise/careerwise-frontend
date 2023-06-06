@@ -3,6 +3,7 @@ import React from 'react';
 import TestResult from '../components/TestResults';
 import ResultData from '../interfaces/ResultData';
 import '../styles/Global.css'
+import { Header } from '../components/Header';
 
 const SurveyView: React.FC = () => {
     const surveyData: ResultData[] = [
@@ -26,11 +27,11 @@ const SurveyView: React.FC = () => {
         },
       ];
     
-      return (
-        <div className='container'>
-          <h1>Resultados</h1>
-          <TestResult data={surveyData} />
-        </div>
+  return (
+        <><Header /><div className='container'>
+      <h1>Resultados</h1>
+      <TestResult data={surveyData} />
+    </div></>
       );
 };
 
