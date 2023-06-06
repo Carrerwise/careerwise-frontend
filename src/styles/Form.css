@@ -92,7 +92,12 @@ label {
     margin-top: 20px;
     margin-bottom: 20px;
 }
-  
+ 
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    width: 300px;
+}
 
 @media (max-width: 600px) {
     .form {

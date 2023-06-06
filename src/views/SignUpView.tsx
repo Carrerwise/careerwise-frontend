@@ -34,6 +34,10 @@ const SignUpForm: React.FC = () => {
     navigate('/test')
   };
 
+  const getBack = () => {
+    navigate('/')
+  };
+
   return (
     <><Header /><div className="signup-container">
       <Card align="center" className="form-card">
@@ -67,7 +71,10 @@ const SignUpForm: React.FC = () => {
           </div>
         </form>
         <CardFooter>
-          <Button color="secondary" variant="contained" onClick={handleSubmit}>Continuar</Button>
+          <div className="button-container">
+            <Button color="inherit" variant="contained" onClick={getBack}>Volver</Button>
+            <Button color="secondary" variant="contained" onClick={handleSubmit}>Continuar</Button>
+          </div>
         </CardFooter>
       </Card>
     </div></>

@@ -47,6 +47,10 @@ const TestView: React.FC = () => {
     }
   }
 
+  const getBack = () => {
+    navigate('/signup')
+  };
+
   return (
       <><Header /><div className="test-container">
       <Card align="center" className="test-form-card">
@@ -57,7 +61,10 @@ const TestView: React.FC = () => {
           <Test questions={questions} answers={answers} setAnswers={setAnswers} />
         </CardBody>
         <CardFooter>
-          <Button color="secondary" variant="contained" onClick={handleSubmit}>Finalizar</Button>
+          <div className="button-container">
+            <Button color="inherit" variant="contained" onClick={getBack}>Volver</Button>
+            <Button color="secondary" variant="contained" onClick={handleSubmit}>Finalizar</Button>
+          </div>
         </CardFooter>
       </Card>
     </div></>
