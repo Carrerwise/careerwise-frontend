@@ -19,7 +19,7 @@ const Checkbox: React.FC<CheckboxProps> = ({ labels, values, setValues}) => {
   };
 
   return (
-    <div className="form-group">
+    <div >
     {labels.map((label) => (
       <div key={label}>
         <label className='checkbox-label'>
