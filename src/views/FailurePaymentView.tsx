@@ -16,7 +16,7 @@ const PaymentFailureView: React.FC = () => {
       try {
         const requestData: AxiosRequestConfig<any> = {
           method: 'POST',
-          url: 'http://localhost:5000/payment/failure',
+          url: 'https://careerwise-api.crossnox.dev/payment/failure',
           data: {
             preference_id: ''
           },

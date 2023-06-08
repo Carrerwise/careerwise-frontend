@@ -1,15 +1,15 @@
 import React from 'react';
 import { Box, Text, Heading, Grid, GridItem, Center } from '@chakra-ui/react';
+import '../styles/TestResults.css';
 
 type ResultItemProps = {
-    idx: number;
     prop: any;
     label: string;
 }
  
-const ResultItem = ({ idx, prop, label }: ResultItemProps) => {
+const ResultItem = ({ prop, label }: ResultItemProps) => {
     return (
-        <Box key={idx} className="resultItem" _hover={{
+        <Box className="resultItem" _hover={{
             background: "#ededed",
             }}
         >
@@ -17,13 +17,15 @@ const ResultItem = ({ idx, prop, label }: ResultItemProps) => {
               {label}
             </Heading>
             <Grid>
-                {prop.map((item: any , idx: number) => (
-                    <GridItem key={idx}>
-                        <Center p={2} bg="gray.200" borderRadius="md">
-                            <Text>{item.aptitude}{item.interest}{item.career}{item.institution}</Text>
-                        </Center>
-                    </GridItem>
-                ))}
+                <GridItem key={prop.name}>
+                    <Center p={2} bg="gray.200" borderRadius="md">
+                        <Text>{prop.aptitude}{prop.activity}{prop.name}</Text>
+                        <Text>{prop.institution}</Text>
+                        <Text>{prop.city}</Text>
+                        <Text>{prop.type}</Text>
+                        <Text>{prop.academy_level}</Text>
+                    </Center>
+                </GridItem>
             </Grid>
         </Box>
     )
