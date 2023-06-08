@@ -7,7 +7,6 @@
 }
 
 .welcome-view {
-  max-width: 600px;
   margin: 0 auto;
   padding: 5px;
   text-align: center;
@@ -30,5 +29,5 @@
   border-radius: 20px;
   padding: 15px;
   height: 100%;
-  width: 40%;
+  width: 23%;
 }

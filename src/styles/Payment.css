@@ -10,14 +10,12 @@
   align-items: center;
   background: linear-gradient(to bottom, #e8e8e8, #edeced);
   height: 480px;
-  width: 110%;
+  width: 100%;
   margin-top: 2px;
 }
 
 .card {
-  background: linear-gradient(to bottom, #dddddd,#c9c9c9);
+  background: linear-gradient(to bottom, #dbdbdb,#dbdbdb);
   border-radius: 20px;
-  padding: 25px;
-  height: 280px;
-  width: 320px;
+  padding: 35px;
 }
