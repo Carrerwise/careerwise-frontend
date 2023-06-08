@@ -20,8 +20,8 @@ function App() {
         <Route path="/signup" element={<SignUpForm />} />
         <Route path="/test" element={<TestView />} />
         <Route path="/results" element={<SurveyView />} />
-          <Route path="/payment/success" element={<PaymentSuccessView />} />
-          <Route path="/payment/failure" element={<PaymentFailureView />} />
+        <Route path="/payment/success" element={<PaymentSuccessView />} />
+        <Route path="/payment/failure" element={<PaymentFailureView />} />
       </Routes>
       </Router>
     </MyContext.Provider>

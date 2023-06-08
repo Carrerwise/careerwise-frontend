@@ -20,22 +20,18 @@ const PaymentFailureView: React.FC = () => {
         console.log(myVariable)
         const requestData: AxiosRequestConfig<any> = {
           method: 'POST',
-          url: 'https://careerwise-api.crossnox.dev/payment/success',
+          url: 'https://careerwise-api.crossnox.dev/payment/failure',
           data: {
-            preference_id: myVariable,
-            status: "success",
+            preference_id: myVariable
           },
         };
         await axios(requestData)
-        navigate("/results")
       } catch (err) {
           console.error(err)
       }
     }
     //postPaymentSuccess();
     console.log(`preference id: ${myVariable}`)
-    console.log(context)
-
   }, [myVariable, navigate, context]);
 
   return (
@@ -52,7 +48,7 @@ const PaymentFailureView: React.FC = () => {
           <Text mb={30}>Intente más tarde</Text>
         </CardBody>
         <CardFooter>
-          <Button color="secondary" variant="contained" onClick={() => navigate('/result')}>Volver</Button>
+          <Button color="secondary" variant="contained" onClick={() => navigate('/')}>Volver</Button>
         </CardFooter>
       </Card>
     </div></>
