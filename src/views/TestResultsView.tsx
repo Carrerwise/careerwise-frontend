@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 
 import ResultData from '../interfaces/ResultData';
 import { Header } from '../components/Header';
-import ResultItem from '../components/ResultItem';
 import '../styles/TestResults.css';
 import axios from 'axios';
+import ResultItem from '../components/ResultItem';
+import CareersItem from '../components/CareersItem';
 
 const SurveyView: React.FC = () => {
   const surveyData: ResultData = 
@@ -35,14 +36,27 @@ const SurveyView: React.FC = () => {
     const getResults = async () => {
       try {
         const resp = await axios.get('https://careerwise-api.crossnox.dev/chaside/1')
-        console.log(resp)
-        setResults(resp.data)
+        let filteredCareers: any[] = []
+        for (let i = 1; i < resp.data.careers.length; i++) {
+          if (resp.data.careers[i].city === 'Buenos Aires' &&
+            resp.data.careers[i].type === 'Presencial') {
+            if (!filteredCareers.includes(resp.data.careers[i])) {
+              filteredCareers.push(resp.data.careers[i])
+            }
+          }
+        }
+        const newResult = {
+          interests: resp.data.interests,
+          aptitudes: resp.data.aptitudes,
+          careers: filteredCareers
+        }
+        setResults(newResult)
       } catch (err) {
           console.error(err)
       }
     }
     getResults()
-  }, [setResults]);
+  }, []);
   
   return (
     <>
@@ -51,7 +65,7 @@ const SurveyView: React.FC = () => {
         <h1 className='title'>Resultados</h1>
         <ResultItem prop={results.interests} label={'Intereses'}/>
         <ResultItem prop={results.aptitudes} label={'Aptitudes'} />
-        <ResultItem prop={results.careers[0]} label={'Carrera'}/>
+        <CareersItem prop={results.careers} label={'Carreras'}/>
       </div>
     </>
       );
