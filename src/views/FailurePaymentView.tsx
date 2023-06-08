@@ -35,7 +35,7 @@ const PaymentFailureView: React.FC = () => {
       }
     }
     postPaymentFailure();
-  }, [navigate]);
+  }, [navigate, query]);
 
   return (
     <><Header /><div className="view">

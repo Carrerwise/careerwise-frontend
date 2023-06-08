@@ -20,7 +20,6 @@ const PaymentSuccessView: React.FC = () => {
   let query = useQuery()
 
   useEffect(() => {
-    console.log(query.get('preference_id'))
     const postPaymentSuccess = async () => {
       try {
         const requestData: AxiosRequestConfig<any> = {
@@ -37,7 +36,6 @@ const PaymentSuccessView: React.FC = () => {
       }
     }
     postPaymentSuccess();
-    //console.log(`preference id: ${myVariable}`)
   }, [query]);
 
   return (
