@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import { Card, CardHeader, CardBody, CardFooter, Heading, Text } from '@chakra-ui/react';
 import { Fade } from 'react-awesome-reveal';
 
-import '../styles/WelcomeView.css';
+import '../styles/Welcome.css';
 import AnimatedBackground from '../components/Background';
 
 const WelcomeView: React.FC = () => {

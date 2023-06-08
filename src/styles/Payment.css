@@ -1,0 +1,23 @@
+* {
+  font-family: 'Roboto', sans-serif;
+}
+
+.view {
+  margin: 0 auto;
+  text-align: center;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  background: linear-gradient(to bottom, #e8e8e8, #edeced);
+  height: 480px;
+  width: 110%;
+  margin-top: 2px;
+}
+
+.card {
+  background: linear-gradient(to bottom, #dddddd,#c9c9c9);
+  border-radius: 20px;
+  padding: 25px;
+  height: 280px;
+  width: 320px;
+}
