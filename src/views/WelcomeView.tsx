@@ -5,7 +5,7 @@ import { Card, CardHeader, CardBody, CardFooter, Heading, Text } from '@chakra-u
 import { Fade } from 'react-awesome-reveal';
 
 import '../styles/WelcomeView.css';
-import AnimatedBackground from '../components/AnimatedBackground';
+import AnimatedBackground from '../components/Background';
 
 const WelcomeView: React.FC = () => {
   const navigate = useNavigate();

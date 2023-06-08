@@ -1,8 +1,8 @@
 import React from 'react';
 import { Flipper, Flipped } from 'react-flip-toolkit';
-import '../styles/AnimatedBackground.css';
+import '../styles/Background.css';
 
-const AnimatedBackground = () => (
+const Background = () => (
   <Flipper flipKey="animate">
     <Flipped flipId="background">
       <div className="background" />
@@ -10,4 +10,4 @@ const AnimatedBackground = () => (
   </Flipper>
 );
 
-export default AnimatedBackground;
+export default Background;
