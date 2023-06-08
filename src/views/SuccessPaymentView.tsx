@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import { Card, CardHeader, CardBody, CardFooter, Heading, Text } from '@chakra-ui/react';
