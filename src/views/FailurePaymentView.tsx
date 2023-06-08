@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import { Card, CardHeader, CardBody, CardFooter, Heading, Text } from '@chakra-ui/react';
 import { FaExclamationCircle  } from 'react-icons/fa';
@@ -11,14 +11,22 @@ import axios, { AxiosRequestConfig } from 'axios';
 const PaymentFailureView: React.FC = () => {
   const navigate = useNavigate();
 
+  function useQuery() {
+    const { search } = useLocation();
+  
+    return React.useMemo(() => new URLSearchParams(search), [search]);
+  }
+  
+  let query = useQuery()
+
   useEffect(() => {
-    const postPaymentSuccess = async () => {
+    const postPaymentFailure = async () => {
       try {
         const requestData: AxiosRequestConfig<any> = {
           method: 'POST',
           url: 'https://careerwise-api.crossnox.dev/payment/failure',
           data: {
-            preference_id: ''
+            preference_id: query.get('preference_id'),
           },
         };
         await axios(requestData)
@@ -26,7 +34,7 @@ const PaymentFailureView: React.FC = () => {
           console.error(err)
       }
     }
-    postPaymentSuccess();
+    postPaymentFailure();
   }, [navigate]);
 
   return (

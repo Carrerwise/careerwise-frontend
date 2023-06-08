@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 
 import WelcomeView from './views/WelcomeView';
 import SignUpForm from './views/SignUpView';
@@ -8,6 +8,8 @@ import TestView from './views/TestView';
 import PaymentSuccessView from './views/SuccessPaymentView';
 import { MyContext } from './components/MyContext';
 import PaymentFailureView from './views/FailurePaymentView';
+
+
 
 function App() {
   const [myVariable, setMyVariable] = useState('');

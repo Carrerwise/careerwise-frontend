@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import { Card, CardHeader, CardBody, CardFooter, Heading, Text } from '@chakra-ui/react';
 import { FaCheck } from 'react-icons/fa';
@@ -11,25 +11,34 @@ import axios, { AxiosRequestConfig } from 'axios';
 const PaymentSuccessView: React.FC = () => {
   const navigate = useNavigate();
   
+  function useQuery() {
+    const { search } = useLocation();
+  
+    return React.useMemo(() => new URLSearchParams(search), [search]);
+  }
+  
+  let query = useQuery()
+
   useEffect(() => {
+    console.log(query.get('preference_id'))
     const postPaymentSuccess = async () => {
       try {
         const requestData: AxiosRequestConfig<any> = {
           method: 'POST',
           url: 'https://careerwise-api.crossnox.dev/payment/success',
           data: {
-            preference_id: '',
+            preference_id: query.get('preference_id'),
             status: "success",
           },
         };
         await axios(requestData)
-        navigate("/results")
       } catch (err) {
           console.error(err)
       }
     }
     postPaymentSuccess();
-  }, [navigate]);
+    //console.log(`preference id: ${myVariable}`)
+  }, [query]);
 
   return (
     <><Header /><div className="view">
@@ -44,7 +53,7 @@ const PaymentSuccessView: React.FC = () => {
           <Text >¿Qué estas esperando para ver los resultados?</Text>
         </CardBody>
         <CardFooter>
-          <Button color="secondary" variant="contained" onClick={() => navigate('/result')}>Ver resultados</Button>
+          <Button color="secondary" variant="contained" onClick={() => navigate('/results')}>Ver resultados</Button>
         </CardFooter>
       </Card>
     </div></>
