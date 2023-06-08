@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import { Card, CardHeader, CardBody, CardFooter, Heading, Text } from '@chakra-ui/react';
 import { FaCheck } from 'react-icons/fa';
@@ -11,30 +11,38 @@ import axios, { AxiosRequestConfig } from 'axios';
 
 const PaymentSuccessView: React.FC = () => {
   const navigate = useNavigate();
+  
+  function useQuery() {
+    const { search } = useLocation();
+  
+    return React.useMemo(() => new URLSearchParams(search), [search]);
+  }
+  
+  let query = useQuery()
   let context = useContext(MyContext);
   const { myVariable, setMyVariable } = context;
 
   useEffect(() => {
+    console.log(query.get('preference_id'))
     const postPaymentSuccess = async () => {
       try {
         console.log(myVariable)
         const requestData: AxiosRequestConfig<any> = {
           method: 'POST',
-          url: 'https://careerwise-api.crossnox.dev/payment/success',
+          url: 'http://localhost:5000/payment/success',
           data: {
-            preference_id: myVariable,
+            preference_id: query.get('preference_id'),
             status: "success",
           },
         };
         await axios(requestData)
-        navigate("/results")
       } catch (err) {
           console.error(err)
       }
     }
-    //postPaymentSuccess();
-    console.log(`preference id: ${myVariable}`)
-  }, [myVariable, navigate, context]);
+    postPaymentSuccess();
+    //console.log(`preference id: ${myVariable}`)
+  }, [query]);
 
   return (
     <><Header /><div className="view">
@@ -49,7 +57,7 @@ const PaymentSuccessView: React.FC = () => {
           <Text mt={30} mb={60}>¿Qué estas esperando para ver los resultados?</Text>
         </CardBody>
         <CardFooter>
-          <Button color="secondary" variant="contained" onClick={() => navigate('/result')}>Ver resultados</Button>
+          <Button color="secondary" variant="contained" onClick={() => navigate('/results')}>Ver resultados</Button>
         </CardFooter>
       </Card>
     </div></>
