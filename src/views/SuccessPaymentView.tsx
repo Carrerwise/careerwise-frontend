@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import { Card, CardHeader, CardBody, CardFooter, Heading, Text } from '@chakra-ui/react';
 import { FaCheck } from 'react-icons/fa';
@@ -14,7 +14,16 @@ const PaymentSuccessView: React.FC = () => {
   let context = useContext(MyContext);
   const { myVariable, setMyVariable } = context;
 
+  function useQuery() {
+    const { search } = useLocation();
+  
+    return React.useMemo(() => new URLSearchParams(search), [search]);
+  }
+  
+  let query = useQuery();
+
   useEffect(() => {
+    console.log(query.get('preference_id'));
     const postPaymentSuccess = async () => {
       try {
         console.log(myVariable)
@@ -22,7 +31,7 @@ const PaymentSuccessView: React.FC = () => {
           method: 'POST',
           url: 'https://careerwise-api.crossnox.dev/payment/success',
           data: {
-            preference_id: myVariable,
+            preference_id: query.get('preference_id'),
             status: "success",
           },
         };
@@ -40,13 +49,13 @@ const PaymentSuccessView: React.FC = () => {
     <><Header /><div className="view">
       <Card align="center" className="card">
         <CardHeader>
-          <Heading as="h2" mt={30} mb={10} color={'black'}> ¡Pago éxitoso! </Heading>
+          <Heading as="h2" color={'black'}> ¡Pago éxitoso! </Heading>
           <span style={{ color: 'green', fontSize: 30, margin: 10}}>
             <FaCheck />
           </span>
         </CardHeader>
         <CardBody>
-          <Text mt={30} mb={60}>¿Qué estas esperando para ver los resultados?</Text>
+          <Text >¿Qué estas esperando para ver los resultados?</Text>
         </CardBody>
         <CardFooter>
           <Button color="secondary" variant="contained" onClick={() => navigate('/result')}>Ver resultados</Button>

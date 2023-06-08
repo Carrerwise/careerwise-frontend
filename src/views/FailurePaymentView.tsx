@@ -38,14 +38,14 @@ const PaymentFailureView: React.FC = () => {
     <><Header /><div className="view">
       <Card align="center" className="card">
         <CardHeader>
-          <Heading as="h2" mt={30} mb={10} color={'black'}> ¡Hubo un error al realizar el pago! </Heading>
+          <Heading as="h2" color={'black'}> ¡Hubo un error al realizar el pago! </Heading>
           <span style={{ color: 'red', fontSize: 33, margin: 10}}>
             <FaExclamationCircle  />
           </span>
         </CardHeader>
         <CardBody>
-          <Text mt={20} mb={10}>El pago no se pudo realizar correctamente</Text>
-          <Text mb={30}>Intente más tarde</Text>
+          <Text>El pago no se pudo realizar correctamente</Text>
+          <Text>Intente más tarde</Text>
         </CardBody>
         <CardFooter>
           <Button color="secondary" variant="contained" onClick={() => navigate('/')}>Volver</Button>
