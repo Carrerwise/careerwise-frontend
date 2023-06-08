@@ -22,7 +22,7 @@ const TestView: React.FC = () => {
     useEffect(() => {
       const getQuestions = async () => {
         try {
-            const resp = await axios.get('https://careerwise-api.crossnox.dev/demo/questions')
+            const resp = await axios.get('http://localhost:5000/demo/questions')
             setQuestions(resp.data)
         } catch (err) {
             console.error(err)
@@ -33,7 +33,7 @@ const TestView: React.FC = () => {
         try {
           const requestData: AxiosRequestConfig<any> = {
             method: 'POST',
-            url: 'https://careerwise-api.crossnox.dev/payment',
+            url: 'http://localhost:5000/payment',
             data: {
               payer_name: "fulano",
               payer_email: "fulano@gmail.com",
@@ -55,7 +55,7 @@ const TestView: React.FC = () => {
       for (var i = 0; i < answers.length; i++) {
         const requestData: AxiosRequestConfig<any> = {
           method: 'POST',
-          url: 'https://careerwise-api.crossnox.dev/users/1/replies',
+          url: 'http://localhost:5000/users/1/replies',
           data: {
             question_id: i + 1,
             reply: answers[i],

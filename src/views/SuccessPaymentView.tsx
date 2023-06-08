@@ -29,7 +29,7 @@ const PaymentSuccessView: React.FC = () => {
         console.log(myVariable)
         const requestData: AxiosRequestConfig<any> = {
           method: 'POST',
-          url: 'https://careerwise-api.crossnox.dev/payment/success',
+          url: 'http://localhost:5000/payment/success',
           data: {
             preference_id: query.get('preference_id'),
             status: "success",
