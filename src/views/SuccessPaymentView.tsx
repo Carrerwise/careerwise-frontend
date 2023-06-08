@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import { Card, CardHeader, CardBody, CardFooter, Heading, Text } from '@chakra-ui/react';
@@ -6,9 +6,35 @@ import { FaCheck } from 'react-icons/fa';
 
 import '../styles/Payment.css';
 import { Header } from '../components/Header';
+import { MyContext } from '../components/MyContext';
+import axios, { AxiosRequestConfig } from 'axios';
 
 const PaymentSuccessView: React.FC = () => {
   const navigate = useNavigate();
+  let context = useContext(MyContext);
+  const { myVariable, setMyVariable } = context;
+
+  useEffect(() => {
+    const postPaymentSuccess = async () => {
+      try {
+        console.log(myVariable)
+        const requestData: AxiosRequestConfig<any> = {
+          method: 'POST',
+          url: 'https://careerwise-api.crossnox.dev/payment/success',
+          data: {
+            preference_id: myVariable,
+            status: "success",
+          },
+        };
+        await axios(requestData)
+        navigate("/results")
+      } catch (err) {
+          console.error(err)
+      }
+    }
+    //postPaymentSuccess();
+    console.log(`preference id: ${myVariable}`)
+  }, [myVariable, navigate, context]);
 
   return (
     <><Header /><div className="view">
