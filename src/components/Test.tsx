@@ -14,7 +14,7 @@ interface TestProps {
 
 const Test: React.FC<TestProps> = ({ questions, answers, setAnswers }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 7;
+  const itemsPerPage = 5;
 
   const handlePageChange = (event: React.ChangeEvent<unknown>, page: number) => {
     setCurrentPage(page);
@@ -35,7 +35,7 @@ const Test: React.FC<TestProps> = ({ questions, answers, setAnswers }) => {
       <div className='questions-container'>
         {displayedData.map((question, idx) => (
           <div key={idx}>
-            <label className='test-label'>{idx+1}. {question.text}</label>
+            <label className='test-label'>{(idx+1)+(itemsPerPage*(currentPage-1))}. {question.text}</label>
             <TestSwitch answers={answers} idx={idx} onAnswerUpdate={handleAnswerUpdate} />
           </div>
         ))}

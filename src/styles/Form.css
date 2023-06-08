@@ -14,10 +14,9 @@
     monospace;
     display: grid;
     align-content: center;
-    justify-content: center;
+    justify-items: center;
     background: linear-gradient(to bottom, #d1cfcf, #6c3e72);
-    height: 100%;
-    padding: 15px;
+    padding: 10px;
 }
 
 .form-title {
@@ -39,8 +38,8 @@
     border-radius: 10px;
     background: linear-gradient(to bottom, #eceaea,#e6e4e4);
     width: 600px;
-    height: 700px;
-    padding: 20px;
+    padding: 30px;
+    display: grid;
 }
   
 .form-group {
@@ -88,7 +87,6 @@ label {
     height: 500px;
     width: 500px;
     margin-top: 20px;
-    margin-bottom: 20px;
 }
  
 .button-container {

@@ -6,7 +6,7 @@ import SignUpForm from './views/SignUpView';
 import SurveyView from './views/TestResultsView';
 import TestView from './views/TestView';
 import PaymentSuccessView from './views/SuccessPaymentView';
-import { MyContext } from './components/MyContext';
+import { MyContext } from './contexts/MyContext';
 import PaymentFailureView from './views/FailurePaymentView';
 
 

@@ -1,15 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import ResultData from '../interfaces/ResultData';
 import { Header } from '../components/Header';
-import { useNavigate } from 'react-router';
-import { Button } from '@mui/material';
 import ResultItem from '../components/ResultItem';
 import '../styles/TestResults.css';
+import axios from 'axios';
 
 const SurveyView: React.FC = () => {
-  const navigate = useNavigate();
-
   const surveyData: ResultData = 
     {
       interests: {
@@ -34,22 +31,18 @@ const SurveyView: React.FC = () => {
   
   const [results, setResults] = useState<ResultData>(surveyData);
 
-  // useEffect(() => {
-  //   const getResults = async () => {
-  //     try {
-  //       const resp = await axios.get('https://careerwise-api.crossnox.dev/chaside/1')
-  //       console.log(resp)
-  //       setResults(resp.data)
-  //     } catch (err) {
-  //         console.error(err)
-  //     }
-  //   }
-  //   getResults()
-  // }, [setResults]);
-  
-  const getBack = () => {
-    navigate('/test')
-  };
+  useEffect(() => {
+    const getResults = async () => {
+      try {
+        const resp = await axios.get('https://careerwise-api.crossnox.dev/chaside/1')
+        console.log(resp)
+        setResults(resp.data)
+      } catch (err) {
+          console.error(err)
+      }
+    }
+    getResults()
+  }, [setResults]);
   
   return (
     <>
@@ -59,7 +52,6 @@ const SurveyView: React.FC = () => {
         <ResultItem prop={results.interests} label={'Intereses'}/>
         <ResultItem prop={results.aptitudes} label={'Aptitudes'} />
         <ResultItem prop={results.careers[0]} label={'Carrera'}/>
-        <Button color="inherit" variant="contained" onClick={getBack}>Volver</Button>
       </div>
     </>
       );

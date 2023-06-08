@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router';
 import axios, { AxiosRequestConfig } from 'axios';
@@ -8,17 +8,14 @@ import { Card, CardHeader, CardBody, CardFooter, Heading } from '@chakra-ui/reac
 import Test from '../components/Test';
 import '../styles/Form.css';
 import { Header } from '../components/Header';
-import { MyContext } from '../components/MyContext';
 
 const TestView: React.FC = () => {
     const [questions, setQuestions] = useState([]);
     const [paymentUrl, setPaymentUrl] = useState("/");
-    const context =  useContext(MyContext);
-    const { myVariable, setMyVariable } = context;
 
     const [answers, setAnswers] = useState<boolean[]>(Array(98).fill(false));
     const navigate = useNavigate();
-    console.log(`preference id: ${myVariable}`)
+    
     useEffect(() => {
       const getQuestions = async () => {
         try {
@@ -41,13 +38,12 @@ const TestView: React.FC = () => {
           };
           const resp = await axios(requestData)
           setPaymentUrl(resp.data.payment_url)
-          setMyVariable(resp.data.preference_id)
         } catch (err) {
             console.error(err)
         }
       }
       getPaymentUrl();
-    }, [setMyVariable]);
+    }, []);
 
   const saveAnswers = async () => {
     try {
@@ -63,7 +59,6 @@ const TestView: React.FC = () => {
 
         };
         await axios(requestData)
-        navigate('/results')
       }
     } catch (err) {
       console.error(err)
@@ -72,7 +67,7 @@ const TestView: React.FC = () => {
 
   const handleSubmit = async () => {
     try {
-      //saveAnswers();
+      saveAnswers();
     } catch (err) {
       console.error(err)
     }

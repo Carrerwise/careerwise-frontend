@@ -22,7 +22,7 @@ const ResultItem = ({ prop, label }: ResultItemProps) => {
                     <Center p={2} bg="gray.200" borderRadius="md">
                         <Text>{prop.aptitude}{prop.activity}{prop.name}</Text>
                         {
-                            label == 'Carrera' &&
+                            label === 'Carrera' &&
                             <>
                             <UnorderedList>
                                 <ListItem><Text> {'🏫 ' + prop.institution}</Text></ListItem>
