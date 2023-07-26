@@ -1,36 +1,58 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import CssBaseline from '@mui/material/CssBaseline';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { Card, CardHeader, CardBody, CardFooter, Heading, Text } from '@chakra-ui/react';
-import { Fade } from 'react-awesome-reveal';
+import { styled } from '@mui/material/styles';
+import { Link } from 'react-router-dom';
 
-import '../styles/Welcome.css';
-import AnimatedBackground from '../components/Background';
+const Root = styled('div')(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+  minHeight: '100vh',
+  paddingTop: theme.spacing(8),
+  paddingBottom: theme.spacing(8),
+  background: theme.palette.primary.main,
+  color: theme.palette.common.white,
+}));
 
-const WelcomeView: React.FC = () => {
-  const navigate = useNavigate();
+const Title = styled(Typography)(({ theme }) => ({
+  fontWeight: 'bold',
+  marginBottom: theme.spacing(4),
+  textShadow: `1px 1px 3px rgba(0, 0, 0, 0.3)`,
+}));
 
+const SubTitle = styled(Typography)(({ theme }) => ({
+  marginBottom: theme.spacing(2),
+}));
+
+const GetStartedButton = styled(Button)(({ theme }) => ({
+  marginTop: theme.spacing(4),
+  color: theme.palette.common.white,
+  borderColor: theme.palette.common.white,
+}));
+
+const LandingPage = () => {
   return (
-    <div className="welcome-container">
-      <AnimatedBackground />
-      <div className="welcome-view">
-        <Fade>
-          <h1 className="welcome-title">Bienvenido a Careerwise</h1>
-        </Fade>
-        <Card align="center" className="main-card">
-          <CardHeader>
-            <Heading as="h3" mb={6}> Test vocacional</Heading>
-          </CardHeader>
-          <CardBody>
-            <Text>Descubre cuál es tu vocación y encuentra el camino hacia tu futuro profesional</Text>
-          </CardBody>
-          <CardFooter>
-            <Button color="secondary" variant="contained" onClick={() => navigate('/signup')}>Comenzar</Button>
-          </CardFooter>
-        </Card>
-      </div>
-    </div>
+    <Root>
+      <CssBaseline />
+      <Container maxWidth="sm">
+        <Title variant="h1">
+          Careerwise
+        </Title>
+        <SubTitle variant="h5">
+          Descubre cuál es tu vocación y encuentra el camino hacia tu futuro profesional
+        </SubTitle>
+        <Link to="/signup" style={{ textDecoration: 'none' }}>
+          <GetStartedButton variant="outlined">
+            Comenzar
+          </GetStartedButton>
+        </Link>      
+        </Container>
+    </Root>
   );
 };
 
-export default WelcomeView;
+export default LandingPage;
