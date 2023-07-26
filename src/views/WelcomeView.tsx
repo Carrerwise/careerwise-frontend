@@ -34,7 +34,7 @@ const GetStartedButton = styled(Button)(({ theme }) => ({
   borderColor: theme.palette.common.white,
 }));
 
-const LandingPage = () => {
+const WelcomeView = () => {
   return (
     <Root>
       <CssBaseline />
@@ -45,7 +45,7 @@ const LandingPage = () => {
         <SubTitle variant="h5">
           Descubre cuál es tu vocación y encuentra el camino hacia tu futuro profesional
         </SubTitle>
-        <Link to="/signup" style={{ textDecoration: 'none' }}>
+        <Link to="/select-role" style={{ textDecoration: 'none' }}>
           <GetStartedButton variant="outlined">
             Comenzar
           </GetStartedButton>
@@ -55,4 +55,4 @@ const LandingPage = () => {
   );
 };
 
-export default LandingPage;
+export default WelcomeView;
