@@ -10,6 +10,8 @@ import TestView from './views/TestView';
 import PaymentSuccessView from './views/SuccessPaymentView';
 import { MyContext } from './contexts/MyContext';
 import PaymentFailureView from './views/FailurePaymentView';
+import LoginFacultyAdmin from './views/LoginFacultyAdmin';
+import SignUpFacultyAdmin from './views/SignUpFacultyAdmin';
 
 
 function App() {
@@ -21,7 +23,8 @@ function App() {
       <Routes>
         <Route path="/" element={<WelcomeView />} />
         <Route path="/select-role" element={<SelectRolePageView />} />
-        <Route path="/signup" element={<SignUpForm />} />
+        <Route path="/login/faculty" element={<LoginFacultyAdmin />} />
+        <Route path="/signup/faculty" element={<SignUpFacultyAdmin />} />
         <Route path="/test" element={<TestView />} />
         <Route path="/results" element={<SurveyView />} />
         <Route path="/payment/success" element={<PaymentSuccessView />} />
