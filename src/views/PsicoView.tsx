@@ -3,32 +3,45 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router';
 import axios, { AxiosRequestConfig } from 'axios';
 import Button from '@mui/material/Button';
+import DatePicker from '@mui/x-date-pickers';
+import TimePicker from '@mui/material';
 import { Table, Thead, Tbody, Tfoot, Tr, Th, Td, TableCaption, TableContainer, Heading } from '@chakra-ui/react';
 import { Header } from '../components/Header';
-import Test from '../components/Test';
 
 
 const PsicoView: React.FC = () => {
     const psicoId = localStorage.getItem('psicoId');
     const psicoEmail = localStorage.getItem('psicoEmail');
     const [slots, setSlots] = useState<any[]>([]);
+    const [date, setDate] = useState('');
+    const [hour, setHour] = useState('10:00');
 
-    const [answers, setAnswers] = useState<boolean[]>(Array(98).fill(false));
     const navigate = useNavigate();
 
     useEffect(() => {
       getSlots();
     }, []);
+ 
 
     const getSlots = async () => {
-        try {
-            //const responseData = await axios.get('https://careerwise-api.crossnox.dev/tutors/'+ psicoId +'/slots');
-            const responseData = await axios.get('https://careerwise-api.crossnox.dev/tutors/1/slots');
-            setSlots(responseData.data);
+      try {
+        const responseData = await axios.get('https://careerwise-api.crossnox.dev/tutors/'+ psicoId +'/slots');
+        //const responseData = await axios.get('https://careerwise-api.crossnox.dev/tutors/1/slots');
+        setSlots(responseData.data);
 
-        } catch (err) {
-            console.error(err)   
-        }
+      } catch (err) {
+        console.error(err)   
+      }
+    }
+
+    const createSlots = async () => {  
+      try {
+        const slotData = { date, hour };
+        const responseData = await axios.post('https://careerwise-api.crossnox.dev/tutors/'+ psicoId +'/slots', slotData);
+        console.log(responseData);  
+      } catch (err) {
+          console.error(err)
+      }
     }
     
     const handleSubmit = async () => {
@@ -86,6 +99,20 @@ const PsicoView: React.FC = () => {
         </tbody>
       </table>
       <Button color="inherit" variant="contained" onClick={getBack}>Volver</Button>
+      <br></br>
+      <div>
+      <DatePicker
+        label="Select date"
+        value={date}
+        onChange={(e) => setDate(e.target.value)}
+      />
+
+      <TimePicker
+        label="Select time"
+        value={hour}
+        onChange={(e) => setHour(e.target.value)}
+      />
+      </div>
   </div></>
 );
 };
