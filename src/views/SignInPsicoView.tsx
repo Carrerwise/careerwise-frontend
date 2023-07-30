@@ -48,7 +48,6 @@ const SingInPiscoView: React.FC = () => {
         localStorage.setItem('psicoId', responseData.data);
         localStorage.setItem('psicoEmail', email);
 
-        navigate('/psico/profile')
       } catch (err) {
           console.error(err)
       }
@@ -82,9 +81,11 @@ const SingInPiscoView: React.FC = () => {
               required
               fullWidth
             />
-            <Button type="submit" variant="contained" color="primary" fullWidth>
-              Sign In
-            </Button>
+            <Link to="/psico/profile" style={{ textDecoration: 'none' }}>      
+              <Button type="submit" variant="contained" color="primary" fullWidth>
+                Sign In
+              </Button>
+            </Link>
           </LoginForm>
         </Container>
       </Root>

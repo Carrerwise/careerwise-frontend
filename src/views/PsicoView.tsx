@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router';
 import axios, { AxiosRequestConfig } from 'axios';
 import Button from '@mui/material/Button';
-import { Card, CardHeader, CardBody, CardFooter, Heading } from '@chakra-ui/react';
+import { Table, Thead, Tbody, Tfoot, Tr, Th, Td, TableCaption, TableContainer, Heading } from '@chakra-ui/react';
 import { Header } from '../components/Header';
 import Test from '../components/Test';
 
@@ -11,59 +11,29 @@ import Test from '../components/Test';
 const PsicoView: React.FC = () => {
     const psicoId = localStorage.getItem('psicoId');
     const psicoEmail = localStorage.getItem('psicoEmail');
-    const [questions, setQuestions] = useState([]);
+    const [slots, setSlots] = useState<any[]>([]);
 
     const [answers, setAnswers] = useState<boolean[]>(Array(98).fill(false));
     const navigate = useNavigate();
 
-
     useEffect(() => {
-        getAllQuestions();
+      getSlots();
     }, []);
 
-
-    const getAllQuestions = async () => {
+    const getSlots = async () => {
         try {
-            const responseData = await axios.get('https://careerwise-api.crossnox.dev/questions');
-            setQuestions(responseData.data);
+            //const responseData = await axios.get('https://careerwise-api.crossnox.dev/tutors/'+ psicoId +'/slots');
+            const responseData = await axios.get('https://careerwise-api.crossnox.dev/tutors/1/slots');
+            setSlots(responseData.data);
 
         } catch (err) {
             console.error(err)   
         }
     }
-
-    const saveAnswers = async () => {
-        try {
-          for (var i = 0; i < answers.length; i++) {
-            const requestData: AxiosRequestConfig<any> = {
-              method: 'POST',
-              url: 'https://careerwise-api.crossnox.dev/users/1/replies',
-              data: {
-                question_id: i + 1,
-                reply: answers[i],
-              },
-    
-            };
-            await axios(requestData)
-          }
-        } catch (err) {
-          console.error(err)
-        }
-      }
     
     const handleSubmit = async () => {
         try {
-            saveAnswers();
-        } catch (err) {
-            console.error(err)
-        }
-    }
-
-    const getQuestions = async () => {
-        try {
-            const responseData = await axios.get('https://careerwise-api.crossnox.dev/users/'+ psicoEmail +'/replies');
-            setQuestions(responseData.data);
-
+          //TODO:
         } catch (err) {
             console.error(err)
         }
@@ -75,19 +45,47 @@ const PsicoView: React.FC = () => {
 
   return (
     <><Header /><div className="test-container">
-    <Card align="center" className="test-form-card">
-      <CardHeader>
-        <Heading className="form-title">Test vocacional</Heading>
-      </CardHeader>
-      <CardBody>
-        <Test questions={questions} answers={answers} setAnswers={setAnswers} />
-      </CardBody>
-      <CardFooter>
-        <div className="button-container">
-          <Button color="inherit" variant="contained" onClick={getBack}>Volver</Button>
-        </div>
-      </CardFooter>
-    </Card>
+        <Heading as='h2' size='2xl'>
+          Dashboard de consultas
+        </Heading>
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Edad</th>
+            <th>Fecha</th>
+            <th>Horario</th>
+            <th>Ubicacion</th>
+            <th>Estudio Alcanzado</th>
+          </tr>
+        </thead>
+        <tbody>
+          {/*
+          <tr>
+            <td>NombreEjemplo</td>
+            <td>Ejemplo@example.com</td>
+            <td>25</td>
+            <td>2023-07-29</td>
+            <td>11</td>
+            <td>Mendoza 2248</td>
+            <td>primary_school</td>
+          </tr>
+          */}
+            {slots.map((item) => (
+            <tr key={item.id}>
+            <td>{item.taken_by.name}</td>
+            <td>{item.taken_by.email}</td>
+            <td>{item.taken_by.age}</td>
+            <td>{item.date}</td>
+            <td>{item.hour}</td>
+            <td>{item.taken_by.location}</td>
+            <td>{item.taken_by.last_finished_degree}</td>
+          </tr>
+          ))}
+        </tbody>
+      </table>
+      <Button color="inherit" variant="contained" onClick={getBack}>Volver</Button>
   </div></>
 );
 };
