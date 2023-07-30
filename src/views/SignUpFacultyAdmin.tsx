@@ -5,6 +5,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
+import axios from 'axios';
 
 const Root = styled('div')(({ theme }) => ({
   display: 'flex',
@@ -29,12 +30,17 @@ const SignUpForm = styled('form')(({ theme }) => ({
   boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
 }));
 
+interface FormData {
+  name: string;
+  email: string;
+  password: string;
+}
+
 const SignUpFacultyAdmin: React.FC = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
     password: '',
-    profilePicture: '',
   });
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,18 +48,23 @@ const SignUpFacultyAdmin: React.FC = () => {
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
   };
 
-  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      // Perform any image file handling or validation if needed
-      setFormData((prevFormData) => ({ ...prevFormData, profilePicture: URL.createObjectURL(file) }));
-    }
-  };
-
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSignUp = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // Add your sign-up logic here
-    console.log(formData);
+    
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/admins/`,
+        formData
+      );
+      console.log(response); // Add this console log to see the response data in the browser's developer tools
+      if (response.status === 201) {
+        // Signup successful, you can now redirect to a success page or login page
+      } else {
+        throw new Error('Signup failed');
+      }
+    } catch (error) {
+      console.error('Signup failed:', error);
+    }
   };
 
   return (
@@ -63,7 +74,7 @@ const SignUpFacultyAdmin: React.FC = () => {
         <Typography variant="h4" align="center" gutterBottom>
           Faculty Member Sign Up
         </Typography>
-        <SignUpForm onSubmit={handleSubmit}>
+        <SignUpForm onSubmit={handleSignUp}>
           <TextField
             label="Name"
             name="name"
@@ -96,22 +107,6 @@ const SignUpFacultyAdmin: React.FC = () => {
             required
             fullWidth
           />
-          <input
-            type="file"
-            accept="image/*"
-            id="profilePicture"
-            name="profilePicture"
-            onChange={handleImageUpload}
-            style={{ display: 'none' }}
-          />
-          <label htmlFor="profilePicture">
-            <Button variant="contained" color="primary" component="span">
-              Upload Profile Picture
-            </Button>
-          </label>
-          {formData.profilePicture && (
-            <img src={formData.profilePicture} alt="Profile" style={{ width: '150px', height: '150px', marginTop: '16px' }} />
-          )}
           <Button type="submit" variant="contained" color="primary" fullWidth style={{ marginTop: '16px' }}>
             Sign Up
           </Button>
@@ -122,4 +117,3 @@ const SignUpFacultyAdmin: React.FC = () => {
 };
 
 export default SignUpFacultyAdmin;
-
