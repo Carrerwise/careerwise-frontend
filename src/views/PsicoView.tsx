@@ -5,13 +5,16 @@ import axios from 'axios';
 import Button from '@mui/material/Button';
 import { Table, Thead, Tbody, Tfoot, Tr, Th, Td, TableCaption, TableContainer, Heading } from '@chakra-ui/react';
 import { Header } from '../components/Header';
-
+import { format } from 'date-fns';
+import { DayPicker } from 'react-day-picker';
+import { TimePicker } from 'react-time-picker';
+import 'react-time-picker/dist/TimePicker.css';
 
 const PsicoView: React.FC = () => {
     const psicoId = localStorage.getItem('psicoId');
     const psicoEmail = localStorage.getItem('psicoEmail');
     const [slots, setSlots] = useState<any[]>([]);
-    const [date, setDate] = useState('');
+    const [date, setDate] = useState<Date>();
     const [hour, setHour] = useState('10:00');
 
     const navigate = useNavigate();
@@ -33,6 +36,7 @@ const PsicoView: React.FC = () => {
 
     const createSlots = async () => {  
       try {
+        //const date = format(date, 'yyyy-MM-dd')
         const slotData = { date, hour };
         const responseData = await axios.post('https://careerwise-api.crossnox.dev/tutors/'+ psicoId +'/slots', slotData);
         console.log(responseData);  
@@ -49,9 +53,13 @@ const PsicoView: React.FC = () => {
         }
     }
 
-  const getBack = () => {
-    navigate('/signin/psico')
-  };
+    const handleHour = (newValue: any) => {
+      setHour(newValue);
+    }
+
+    const getBack = () => {
+      navigate('/signin/psico')
+    };
 
   return (
     <><Header /><div className="test-container">
@@ -97,9 +105,18 @@ const PsicoView: React.FC = () => {
       </table>
       <Button color="inherit" variant="contained" onClick={getBack}>Volver</Button>
       <br></br>
-      
+
+      <DayPicker
+        mode="single"
+        selected={date}
+        onSelect={setDate}
+        footer="Select date"
+      />
+    
+      <TimePicker value={hour} onChange={handleHour} />
+
   </div></>
-);
+  );
 };
 
 export default PsicoView;
