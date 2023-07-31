@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router';
-import axios, { AxiosRequestConfig } from 'axios';
+import axios from 'axios';
 import Button from '@mui/material/Button';
-import DatePicker from '@mui/x-date-pickers';
-import TimePicker from '@mui/material';
 import { Table, Thead, Tbody, Tfoot, Tr, Th, Td, TableCaption, TableContainer, Heading } from '@chakra-ui/react';
 import { Header } from '../components/Header';
 
@@ -22,7 +20,6 @@ const PsicoView: React.FC = () => {
       getSlots();
     }, []);
  
-
     const getSlots = async () => {
       try {
         const responseData = await axios.get('https://careerwise-api.crossnox.dev/tutors/'+ psicoId +'/slots');
@@ -100,19 +97,7 @@ const PsicoView: React.FC = () => {
       </table>
       <Button color="inherit" variant="contained" onClick={getBack}>Volver</Button>
       <br></br>
-      <div>
-      <DatePicker
-        label="Select date"
-        value={date}
-        onChange={(e) => setDate(e.target.value)}
-      />
-
-      <TimePicker
-        label="Select time"
-        value={hour}
-        onChange={(e) => setHour(e.target.value)}
-      />
-      </div>
+      
   </div></>
 );
 };
