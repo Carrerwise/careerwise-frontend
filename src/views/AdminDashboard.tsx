@@ -1,126 +1,208 @@
-import React, { useState } from 'react';
-import Container from '@mui/material/Container';
+import * as React from 'react';
+import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import MuiDrawer from '@mui/material/Drawer';
+import Box from '@mui/material/Box';
+import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
+import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
+import Badge from '@mui/material/Badge';
+import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-import ListAltIcon from '@mui/icons-material/ListAlt';
+import Link from '@mui/material/Link';
+import MenuIcon from '@mui/icons-material/Menu';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import { mainListItems, secondaryListItems } from './listitems';
 
-const useStyles = {
-  root: {
-    marginTop: 16,
-  },
-  paper: {
-    padding: 16,
-  },
-  addButton: {
-    marginTop: 16,
-  },
-  formContainer: {
-    display: 'flex',
-    flexDirection: 'column' as const, // Set flexDirection to a valid value
-    gap: 16,
-    width: '400px',
-  },
-  sidebar: {
-    width: '200px',
-    padding: '16px',
-    backgroundColor: '#f0f0f0',
-  },
-  listItem: {
-    marginBottom: '8px',
-    cursor: 'pointer',
-  },
-};
 
+function Copyright(props: any) {
+    return (
+      <Typography variant="body2" color="text.secondary" align="center" {...props}>
+        {'Copyright © '}
+        <Link color="inherit" href="https://mui.com/">
+          Your Website
+        </Link>{' '}
+        {new Date().getFullYear()}
+        {'.'}
+      </Typography>
+    );
+  }
+  
 interface Career {
   id: number;
   title: string;
   description: string;
 }
 
-const AdminDashboard: React.FC = () => {
-    const [careers, setCareers] = useState<Career[]>([]);
-    const [newCareer, setNewCareer] = useState<Career>({ id: 1, title: '', description: '' });
-    const [selectedCareer, setSelectedCareer] = useState<Career | null>(null);
-  
-    // Function to handle modification of a career
-    const handleModifyCareer = (id: number) => {
-      const selectedCareer = careers.find((career) => career.id === id);
-      if (selectedCareer) {
-        setSelectedCareer(selectedCareer);
-      }
-    };
-  
-    // Function to handle deletion of a career
-    const handleDeleteCareer = (id: number) => {
-      // Perform API call or any other logic to delete the career with the given id
-      // After successfully deleting the career, update the careers state to remove the deleted career from the list
-      const updatedCareers = careers.filter((career) => career.id !== id);
-      setCareers(updatedCareers);
-    };
+const drawerWidth = 240;
+interface AppBarProps extends MuiAppBarProps {
+    open?: boolean;
+  }
+
+const AppBar = styled(MuiAppBar, {
+    shouldForwardProp: (prop) => prop !== 'open',
+  })<AppBarProps>(({ theme, open }) => ({
+    zIndex: theme.zIndex.drawer + 1,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    ...(open && {
+      marginLeft: drawerWidth,
+      width: `calc(100% - ${drawerWidth}px)`,
+      transition: theme.transitions.create(['width', 'margin'], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+    }),
+  }));
+
+  const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
+    ({ theme, open }) => ({
+      '& .MuiDrawer-paper': {
+        position: 'relative',
+        whiteSpace: 'nowrap',
+        width: drawerWidth,
+        transition: theme.transitions.create('width', {
+          easing: theme.transitions.easing.sharp,
+          duration: theme.transitions.duration.enteringScreen,
+        }),
+        boxSizing: 'border-box',
+        ...(!open && {
+          overflowX: 'hidden',
+          transition: theme.transitions.create('width', {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.leavingScreen,
+          }),
+          width: theme.spacing(7),
+          [theme.breakpoints.up('sm')]: {
+            width: theme.spacing(9),
+          },
+        }),
+      },
+    }),
+  );
+
+const defaultTheme = createTheme();
+
+export default function FacultyAdminDashboard() {
+  const [open, setOpen] = React.useState(true);
+  const toggleDrawer = () => {
+    setOpen(!open);
+  };
 
   return (
-    <Container style={useStyles.root}>
-      <Grid container spacing={2}>
-        {/* Sidebar */}
-        <Grid item xs={12} md={3}>
-          <Paper style={useStyles.sidebar}>
-            <Typography variant="h6" gutterBottom>
+    <ThemeProvider theme={defaultTheme}>
+      <Box sx={{ display: 'flex' }}>
+        <CssBaseline />
+        <AppBar position="absolute" sx={{ ml: open ? `${drawerWidth}px` : '0', width: open ? `calc(100% - ${drawerWidth}px)` : '100%' }}>
+          <Toolbar
+            sx={{
+              pr: '24px', // keep right padding when drawer closed
+            }}
+          >
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="open drawer"
+              onClick={toggleDrawer}
+              sx={{
+                marginRight: '36px',
+                display: open ? 'none' : 'inherit',
+              }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography
+              component="h1"
+              variant="h6"
+              color="inherit"
+              noWrap
+              sx={{ flexGrow: 1 }}
+            >
               Dashboard
             </Typography>
-            <List>
-              <ListItem style={useStyles.listItem} button>
-                <ListItemIcon>
-                  <AddCircleIcon />
-                </ListItemIcon>
-                <ListItemText primary="Add New Career" />
-              </ListItem>
-              <ListItem style={useStyles.listItem} button>
-                <ListItemIcon>
-                  <ListAltIcon />
-                </ListItemIcon>
-                <ListItemText primary="Existing Careers" />
-              </ListItem>
-              {/* Add more options as needed */}
-            </List>
-          </Paper>
-        </Grid>
-  
-        {/* Main Content */}
-        <Grid item xs={12} md={9}>
-          <Paper style={useStyles.paper}>
-            {/* Show the list of existing careers */}
-            <Typography variant="h5" gutterBottom>
-              Existing Careers
-            </Typography>
-            {careers.map((career) => (
-              <div key={career.id} style={useStyles.formContainer}>
-                <Typography variant="h6">{career.title}</Typography>
-                <Typography>{career.description}</Typography>
-                <Box display="flex" justifyContent="space-between">
-                  <Button variant="contained" color="primary" onClick={() => handleModifyCareer(career.id)}>
-                    Modify
-                  </Button>
-                  <Button variant="contained" color="secondary" onClick={() => handleDeleteCareer(career.id)}>
-                    Delete
-                  </Button>
-                </Box>
-              </div>
-            ))}
-          </Paper>
-        </Grid>
-      </Grid>
-    </Container>
-  );   
-};
-
-export default AdminDashboard;
-
+            <IconButton color="inherit">
+              <Badge badgeContent={4} color="secondary">
+                <NotificationsIcon />
+              </Badge>
+            </IconButton>
+          </Toolbar>
+        </AppBar>
+        <Drawer variant="permanent" open={open}>
+          <Toolbar
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'flex-end',
+              px: [1],
+            }}
+          >
+            <IconButton onClick={toggleDrawer}>
+              <ChevronLeftIcon />
+            </IconButton>
+          </Toolbar>
+          <Divider />
+          <List component="nav">
+            {mainListItems}
+            <Divider sx={{ my: 1 }} />
+            {secondaryListItems}
+          </List>
+        </Drawer>
+        <Box
+          component="main"
+          sx={{
+            backgroundColor: (theme) =>
+              theme.palette.mode === 'light'
+                ? theme.palette.grey[100]
+                : theme.palette.grey[900],
+            flexGrow: 1,
+            height: '100vh',
+            overflow: 'auto',
+          }}
+        >
+          <Toolbar />
+          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+            <Grid container spacing={3}>
+              {/* Chart */}
+              <Grid item xs={12} md={8} lg={9}>
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: 240,
+                  }}
+                >
+                </Paper>
+              </Grid>
+              {/* Recent Deposits */}
+              <Grid item xs={12} md={4} lg={3}>
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: 240,
+                  }}
+                >
+                </Paper>
+              </Grid>
+              {/* Recent Orders */}
+              <Grid item xs={12}>
+                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+                </Paper>
+              </Grid>
+            </Grid>
+            <Copyright sx={{ pt: 4 }} />
+          </Container>
+        </Box>
+      </Box>
+    </ThemeProvider>
+  );
+}
