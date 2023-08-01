@@ -9,6 +9,8 @@ import { format } from 'date-fns';
 import { DayPicker } from 'react-day-picker';
 import { TimePicker } from 'react-time-picker';
 import 'react-time-picker/dist/TimePicker.css';
+import { DataGrid } from '@mui/x-data-grid';
+
 
 const PsicoView: React.FC = () => {
     const psicoId = localStorage.getItem('psicoId');
@@ -16,13 +18,42 @@ const PsicoView: React.FC = () => {
     const [slots, setSlots] = useState<any[]>([]);
     const [date, setDate] = useState<Date>();
     const [hour, setHour] = useState('10:00');
+    const [rows, setRows] = useState([]);
 
     const navigate = useNavigate();
 
     useEffect(() => {
       getSlots();
+      const rows = getRows();
     }, []);
  
+    const columns = [
+      { field: 'nombre', headerName: 'name', width: 130 },
+      { field: 'email', headerName: 'Email', width: 130 },
+      { field: 'edad', headerName: 'Edad', width: 130 },
+      { field: 'fecha', headerName: 'Fecha', width: 110 },
+      { field: 'horario', headerName: 'Horario', width: 70 },
+      { field: 'ubicacion', headerName: 'Ubicacion', width: 210 },
+      { field: 'estudioAlcanzado', headerName: 'Estudio Alcanzado', width: 210 },
+    ];
+
+    const getRows = () => {
+      const row = [];
+      for (let i = 0; i < slots.length; i++) {
+        const jsonObj = {'nombre':slots[i].taken_by.name,
+        'email':slots[i].taken_by.email,
+        'edad':slots[i].taken_by.age,
+        'fecha':slots[i].date,
+        'horario':slots[i].hour,
+        'ubicacion':slots[i].taken_by.location,
+        'estudioAlcanzado':slots[i].taken_by.last_finished_degree
+        }
+        row.push(jsonObj)
+      }
+      //setRows(row);
+      return row;
+    }
+
     const getSlots = async () => {
       try {
         const responseData = await axios.get('https://careerwise-api.crossnox.dev/tutors/'+ psicoId +'/slots');
@@ -66,6 +97,9 @@ const PsicoView: React.FC = () => {
         <Heading as='h2' size='2xl'>
           Dashboard de consultas
         </Heading>
+      <div style={{ height: 300, width: '100%' }}>
+        <DataGrid rows={rows} columns={columns} />
+      </div>
       <table>
         <thead>
           <tr>
@@ -105,15 +139,16 @@ const PsicoView: React.FC = () => {
       </table>
       <Button color="inherit" variant="contained" onClick={getBack}>Volver</Button>
       <br></br>
-
+      <Heading as='h2' size='2xl'>
+          Cargar nuevas consultas
+      </Heading>
       <DayPicker
         mode="single"
         selected={date}
         onSelect={setDate}
-        footer="Select date"
+        footer="Seleccionar fecha de consulta"
       />
-    
-      <TimePicker value={hour} onChange={handleHour} />
+      <TimePicker value={hour} onChange={handleHour} format='hh:mm' name='seleccionar hora de consulta'/>
 
   </div></>
   );
