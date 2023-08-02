@@ -13,9 +13,10 @@ import PaymentFailureView from './views/FailurePaymentView';
 import LoginFacultyAdmin from './views/LoginFacultyAdmin';
 import SignUpFacultyAdmin from './views/SignUpFacultyAdmin';
 import AdminDashboard from './views/AdminDashboard';
+import BoostCareerPage from './views/BoostCareerView';
 
 
-function App() {
+const App: React.FC = () => {
   const [myVariable, setMyVariable] = useState('');
 
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/login/faculty" element={<LoginFacultyAdmin />} />
         <Route path="/signup/faculty" element={<SignUpFacultyAdmin />} />
         <Route path="/faculty" element={<AdminDashboard />} />
+        <Route path="/boost-career/:careerId" element={<BoostCareerPage />} />
         <Route path="/test" element={<TestView />} />
         <Route path="/results" element={<SurveyView />} />
         <Route path="/payment/success" element={<PaymentSuccessView />} />

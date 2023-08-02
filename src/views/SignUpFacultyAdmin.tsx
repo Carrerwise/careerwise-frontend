@@ -59,6 +59,9 @@ const SignUpFacultyAdmin: React.FC = () => {
       console.log(response); // Add this console log to see the response data in the browser's developer tools
       if (response.status === 201) {
         // Signup successful, you can now redirect to a success page or login page
+        const userEmail = response.data.email
+        localStorage.setItem('userEmail', userEmail);
+        window.location.href = '/faculty';
       } else {
         throw new Error('Signup failed');
       }

@@ -59,6 +59,9 @@ const LoginFacultyAdmin: React.FC = () => {
       console.log(response); // Add this console log to see the response data in the browser's developer tools
       if (response.status === 200) {
         // Login successful, you can now redirect to a dashboard or home page
+        const userEmail = response.data.email
+        localStorage.setItem('userEmail', userEmail);
+        window.location.href = '/faculty';
       } else {
         throw new Error('Login failed');
       }
