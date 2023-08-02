@@ -123,7 +123,7 @@ const PsicoView: React.FC = () => {
         <h1>
           Dashboard de consultas
         </h1>
-      <div style={{ height: 300, width: '100%' }}>
+      <div style={{ height: 300, width: '50%', margin: 'auto' }}>
         <DataGrid rows={rows} columns={columns} />
       </div>
       </div>
@@ -166,7 +166,6 @@ const PsicoView: React.FC = () => {
         </tbody>
       </table>
       */}
-    <br></br>
     <div
       style={{
         display: "flex",
