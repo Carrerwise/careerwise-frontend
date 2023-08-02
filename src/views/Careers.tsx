@@ -45,6 +45,25 @@ export default function Careers() {
 
   const handleDeleteCareer = (id: number) => {
     console.log(id);
+    const userEmail = localStorage.getItem('userEmail');
+    axios.delete(`https://careerwise-api.crossnox.dev/admins/${userEmail}/${id}`) // Replace with your API endpoint
+      .catch(error => {
+        console.error('Error fetching career data:', error);
+      });
+    handleSetCareers()
+  };
+
+  const handleSetCareers = () => {
+    const userEmail = localStorage.getItem('userEmail');
+
+    //axios.get(`https://careerwise-api.crossnox.dev/admins/${userEmail}/careers`) // Replace with your API endpoint
+    axios.get(`https://careerwise-api.crossnox.dev/careers`) // Replace with your API endpoint
+    .then(response => {
+        setCareers(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching career data:', error);
+      });
   };
 
   const handleUpdateCareer = (id: number) => {
