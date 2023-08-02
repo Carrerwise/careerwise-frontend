@@ -10,6 +10,7 @@ import { DayPicker } from 'react-day-picker';
 import { TimePicker } from 'react-time-picker';
 import 'react-time-picker/dist/TimePicker.css';
 import { DataGrid } from '@mui/x-data-grid';
+import Modal from 'react-modal';
 
 
 const PsicoView: React.FC = () => {
@@ -19,6 +20,15 @@ const PsicoView: React.FC = () => {
     const [date, setDate] = useState<Date>();
     const [hour, setHour] = useState('10:00');
     const [rows, setRows] = useState([]);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+
+    const handleButtonClick = () => {
+      setModalIsOpen(true);
+    };
+  
+    const handleCloseModal = () => {
+      setModalIsOpen(false);
+    };
 
     const navigate = useNavigate();
 
@@ -28,9 +38,9 @@ const PsicoView: React.FC = () => {
     }, []);
  
     const columns = [
-      { field: 'nombre', headerName: 'name', width: 130 },
-      { field: 'email', headerName: 'Email', width: 130 },
-      { field: 'edad', headerName: 'Edad', width: 130 },
+      { field: 'nombre', headerName: 'name', width: 150 },
+      { field: 'email', headerName: 'Email', width: 200 },
+      { field: 'edad', headerName: 'Edad', width: 70 },
       { field: 'fecha', headerName: 'Fecha', width: 110 },
       { field: 'horario', headerName: 'Horario', width: 70 },
       { field: 'ubicacion', headerName: 'Ubicacion', width: 210 },
@@ -40,13 +50,14 @@ const PsicoView: React.FC = () => {
     const getRows = () => {
       const row = [];
       for (let i = 0; i < slots.length; i++) {
-        const jsonObj = {'nombre':slots[i].taken_by.name,
-        'email':slots[i].taken_by.email,
-        'edad':slots[i].taken_by.age,
-        'fecha':slots[i].date,
-        'horario':slots[i].hour,
-        'ubicacion':slots[i].taken_by.location,
-        'estudioAlcanzado':slots[i].taken_by.last_finished_degree
+        const jsonObj = {
+          nombre:slots[i].taken_by.name,
+          email:slots[i].taken_by.email,
+          edad:slots[i].taken_by.age,
+          fecha:slots[i].date,
+          horario:slots[i].hour,
+          ubicacion:slots[i].taken_by.location,
+          estudioAlcanzado:slots[i].taken_by.last_finished_degree
         }
         row.push(jsonObj)
       }
@@ -78,6 +89,8 @@ const PsicoView: React.FC = () => {
     
     const handleSubmit = async () => {
         try {
+          createSlots();
+          handleButtonClick();
           //TODO:
         } catch (err) {
             console.error(err)
@@ -94,11 +107,13 @@ const PsicoView: React.FC = () => {
 
   return (
     <>
-        <Heading as='h2' size='2xl'>
+    <div style={{ display: 'flex', flexDirection:'column', alignItems: 'center', justifyContent: 'center', height: '40vh' }}>
+        <h2>
           Dashboard de consultas
-        </Heading>
+        </h2>
       <div style={{ height: 300, width: '100%' }}>
         <DataGrid rows={rows} columns={columns} />
+      </div>
       </div>
       {/*
       <table>
@@ -139,11 +154,11 @@ const PsicoView: React.FC = () => {
         </tbody>
       </table>
       */}
-      <Button color="inherit" variant="contained" onClick={getBack}>Volver</Button>
-      <br></br>
-      <Heading as='h2' size='2xl'>
+    <br></br>
+    <div style={{ display: 'flex', flexDirection:'column', alignItems: 'center', justifyContent: 'center', height: '40vh' }}>
+        <h2>
           Cargar nuevas consultas
-      </Heading>
+        </h2>
       <DayPicker
         mode="single"
         selected={date}
@@ -151,7 +166,15 @@ const PsicoView: React.FC = () => {
         footer="Seleccionar fecha de consulta"
       />
       <TimePicker value={hour} onChange={handleHour} format='hh:mm' name='seleccionar hora de consulta'/>
-
+      <br></br>
+      <Button color="inherit" variant="contained" onClick={handleSubmit}>Cargar consulta</Button>
+      <Modal isOpen={modalIsOpen} onRequestClose={handleCloseModal}>
+        <h2>Consulta cargada exitosamente !</h2>
+        <button onClick={handleCloseModal}>Close</button>
+      </Modal>
+      <br></br><br></br><br></br>
+      <Button color="inherit" variant="contained" onClick={getBack}>Volver</Button>
+      </div>
   </>
   );
 };
