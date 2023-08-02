@@ -17,9 +17,9 @@ import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import { mainListItems, secondaryListItems } from './listitems';
+import {ListItems}  from './listitems';
 import Careers from './Careers';
-
+import UploadCareerForm from './UploadCareerView';
 
 function Copyright(props: any) {
     return (
@@ -86,6 +86,7 @@ const AppBar = styled(MuiAppBar, {
 const defaultTheme = createTheme();
 
 export default function FacultyAdminDashboard() {
+  const [showForm, setShowForm] = React.useState(false);
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -143,11 +144,7 @@ export default function FacultyAdminDashboard() {
             </IconButton>
           </Toolbar>
           <Divider />
-          <List component="nav">
-            {mainListItems}
-            <Divider sx={{ my: 1 }} />
-            {secondaryListItems}
-          </List>
+            <ListItems setShowForm={setShowForm}/>
         </Drawer>
         <Box
           component="main"
@@ -167,7 +164,13 @@ export default function FacultyAdminDashboard() {
               {/* Careers */}
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                    <Careers />
+                    {showForm ? (
+                    /* Render the upload form component here */
+                    <UploadCareerForm />
+                    ) : (
+                    /* Render the careers component here */
+                    <Careers/>
+                    )}
                 </Paper>
               </Grid>
             </Grid>
