@@ -11,13 +11,15 @@ import { TimePicker } from 'react-time-picker';
 import 'react-time-picker/dist/TimePicker.css';
 import { DataGrid } from '@mui/x-data-grid';
 import Modal from 'react-modal';
-
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
+import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
 const PsicoView: React.FC = () => {
     const psicoId = localStorage.getItem('psicoId');
     const psicoEmail = localStorage.getItem('psicoEmail');
     const [slots, setSlots] = useState<any[]>([]);
-    const [date, setDate] = useState<Date>();
+    const [date, setDate] = useState<Date | null>();
     const [hour, setHour] = useState('10:00');
     const [rows, setRows] = useState([]);
     const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -97,6 +99,10 @@ const PsicoView: React.FC = () => {
         }
     }
 
+    const handleDate = (newValue: any) => {
+      setDate(newValue);
+    }
+
     const handleHour = (newValue: any) => {
       setHour(newValue);
     }
@@ -108,9 +114,9 @@ const PsicoView: React.FC = () => {
   return (
     <>
     <div style={{ display: 'flex', flexDirection:'column', alignItems: 'center', justifyContent: 'center', height: '40vh' }}>
-        <h2>
+        <h1>
           Dashboard de consultas
-        </h2>
+        </h1>
       <div style={{ height: 300, width: '100%' }}>
         <DataGrid rows={rows} columns={columns} />
       </div>
@@ -155,26 +161,51 @@ const PsicoView: React.FC = () => {
       </table>
       */}
     <br></br>
-    <div style={{ display: 'flex', flexDirection:'column', alignItems: 'center', justifyContent: 'center', height: '40vh' }}>
-        <h2>
-          Cargar nuevas consultas
-        </h2>
-      <DayPicker
-        mode="single"
-        selected={date}
-        onSelect={setDate}
-        footer="Seleccionar fecha de consulta"
-      />
-      <TimePicker value={hour} onChange={handleHour} format='hh:mm' name='seleccionar hora de consulta'/>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "40vh",
+      }}
+    >
+      <h1>Cargar nuevas consultas</h1>
+      <div>
+      <p>Seleccione una fecha</p>
+      <DatePicker minDate={new Date()} selected={date} onChange={(date) => setDate(date)} />
+      </div>
       <br></br>
-      <Button color="inherit" variant="contained" onClick={handleSubmit}>Cargar consulta</Button>
+      <TimePicker
+        value={hour}
+        onChange={handleHour}
+        format="hh:mm"
+        name="seleccionar hora de consulta"
+      />
+      <br></br>
+      <Button
+        color="inherit"
+        variant="contained"
+        onClick={handleSubmit}
+      >
+        Cargar consulta
+      </Button>
       <Modal isOpen={modalIsOpen} onRequestClose={handleCloseModal}>
         <h2>Consulta cargada exitosamente !</h2>
         <button onClick={handleCloseModal}>Close</button>
       </Modal>
-      <br></br><br></br><br></br>
-      <Button color="inherit" variant="contained" onClick={getBack}>Volver</Button>
-      </div>
+      <br></br>
+      <br></br>
+      <br></br>
+      <Button
+        color="inherit"
+        variant="contained"
+        onClick={getBack}
+      >
+        Volver
+      </Button>
+      
+    </div>;
   </>
   );
 };
