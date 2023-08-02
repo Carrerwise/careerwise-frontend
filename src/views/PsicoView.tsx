@@ -93,13 +93,14 @@ const PsicoView: React.FC = () => {
     };
 
   return (
-    <><Header /><div className="test-container">
+    <>
         <Heading as='h2' size='2xl'>
           Dashboard de consultas
         </Heading>
       <div style={{ height: 300, width: '100%' }}>
         <DataGrid rows={rows} columns={columns} />
       </div>
+      {/*
       <table>
         <thead>
           <tr>
@@ -113,7 +114,7 @@ const PsicoView: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {/*
+          
           <tr>
             <td>NombreEjemplo</td>
             <td>Ejemplo@example.com</td>
@@ -123,7 +124,7 @@ const PsicoView: React.FC = () => {
             <td>Mendoza 2248</td>
             <td>primary_school</td>
           </tr>
-          */}
+          
             {slots.map((item) => (
             <tr key={item.id}>
             <td>{item.taken_by.name}</td>
@@ -137,6 +138,7 @@ const PsicoView: React.FC = () => {
           ))}
         </tbody>
       </table>
+      */}
       <Button color="inherit" variant="contained" onClick={getBack}>Volver</Button>
       <br></br>
       <Heading as='h2' size='2xl'>
@@ -150,7 +152,7 @@ const PsicoView: React.FC = () => {
       />
       <TimePicker value={hour} onChange={handleHour} format='hh:mm' name='seleccionar hora de consulta'/>
 
-  </div></>
+  </>
   );
 };
 

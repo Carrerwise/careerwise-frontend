@@ -81,7 +81,7 @@ const SingInPiscoView: React.FC = () => {
               required
               fullWidth
             />
-            <Link to="/psico/profile" style={{ textDecoration: 'none' }}>      
+            <Link to="/psico" style={{ textDecoration: 'none' }}>      
               <Button type="submit" variant="contained" color="primary" fullWidth>
                 Sign In
               </Button>

@@ -24,7 +24,7 @@ function App() {
         <Route path="/" element={<WelcomeView />} />
         <Route path="/select-role" element={<SelectRolePageView />} />
         <Route path="/signin/psico" element={<SignInPsicoView />} />
-        <Route path="/psico/profile" element={<PsicoView />} />
+        <Route path="/psico" element={<PsicoView />} />
         <Route path="/signup" element={<SignUpForm />} />
         <Route path="/test" element={<TestView />} />
         <Route path="/results" element={<SurveyView />} />
