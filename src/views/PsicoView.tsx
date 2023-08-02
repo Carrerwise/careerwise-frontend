@@ -6,23 +6,29 @@ import Button from '@mui/material/Button';
 import { Table, Thead, Tbody, Tfoot, Tr, Th, Td, TableCaption, TableContainer, Heading } from '@chakra-ui/react';
 import { Header } from '../components/Header';
 import { format } from 'date-fns';
-import { DayPicker } from 'react-day-picker';
-import { TimePicker } from 'react-time-picker';
-import 'react-time-picker/dist/TimePicker.css';
+import { FaClock, FaTimes } from 'react-icons/fa';
+import Dayjs from 'dayjs';
+import { TimePicker } from 'antd';
 import { DataGrid } from '@mui/x-data-grid';
 import Modal from 'react-modal';
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
+import '../styles/Modal.css';
+import '../styles/TimePicker.css';
+
 
 const PsicoView: React.FC = () => {
     const psicoId = localStorage.getItem('psicoId');
     const psicoEmail = localStorage.getItem('psicoEmail');
     const [slots, setSlots] = useState<any[]>([]);
     const [date, setDate] = useState<Date | null>();
-    const [hour, setHour] = useState('10:00');
+    const [hour, setHour] = useState();
     const [rows, setRows] = useState([]);
     const [modalIsOpen, setModalIsOpen] = useState(false);
+
+    const minTime: Date = new Date("01/02/2021 00:00");
+    const maxTime: Date = new Date("01/02/2021 23:59");
 
     const handleButtonClick = () => {
       setModalIsOpen(true);
@@ -172,39 +178,24 @@ const PsicoView: React.FC = () => {
     >
       <h1>Cargar nuevas consultas</h1>
       <div>
-      <p>Seleccione una fecha</p>
-      <DatePicker minDate={new Date()} selected={date} onChange={(date) => setDate(date)} />
+        <p>  Seleccione una fecha</p>
+        <DatePicker minDate={new Date()} selected={date} onChange={handleDate} required />
       </div>
       <br></br>
-      <TimePicker
-        value={hour}
-        onChange={handleHour}
-        format="hh:mm"
-        name="seleccionar hora de consulta"
-      />
+        <p>Seleccione una horario</p>
       <br></br>
-      <Button
-        color="inherit"
-        variant="contained"
-        onClick={handleSubmit}
-      >
-        Cargar consulta
-      </Button>
-      <Modal isOpen={modalIsOpen} onRequestClose={handleCloseModal}>
+        <TimePicker value={hour} onChange={handleHour} minuteStep={30} defaultValue={Dayjs('07:00', 'HH:mm')} format={'HH:mm'}/>
+      <br></br>
+      <br></br>
+      <Button color="inherit" variant="contained" onClick={handleSubmit}> Cargar consulta </Button>
+      <Modal className='my-modal' isOpen={modalIsOpen} onRequestClose={handleCloseModal}>
         <h2>Consulta cargada exitosamente !</h2>
         <button onClick={handleCloseModal}>Close</button>
       </Modal>
       <br></br>
       <br></br>
       <br></br>
-      <Button
-        color="inherit"
-        variant="contained"
-        onClick={getBack}
-      >
-        Volver
-      </Button>
-      
+      <Button color="inherit" variant="contained" onClick={getBack}> Volver </Button>
     </div>;
   </>
   );
