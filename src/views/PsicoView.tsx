@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import axios from 'axios';
 import Button from '@mui/material/Button';
 import Dayjs from 'dayjs';
+import { format } from "date-fns";
 import { TimePicker } from 'antd';
 import { DataGrid } from '@mui/x-data-grid';
 import Modal from 'react-modal';
@@ -14,9 +15,10 @@ import '../styles/TimePicker.css';
 
 
 const PsicoView: React.FC = () => {
+    const psicoEmail = localStorage.getItem('psicoEmail');
     const [slots, setSlots] = useState<any[]>([]);
-    const [date, setDate] = useState<Date | null>();
-    const [hour, setHour] = useState();
+    const [myDate, setDate] = useState<Date>(new Date());
+    const [myHour, setHour] = useState();
     const [rows, setRows] = useState<any[]>([]);
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -29,10 +31,6 @@ const PsicoView: React.FC = () => {
     };
 
     const navigate = useNavigate();
-
-    useEffect(() => {
-      getSlots();
-    }, []);
  
     const columns = [
       //{ field: 'nombre', headerName: 'name', width: 150 },
@@ -44,37 +42,13 @@ const PsicoView: React.FC = () => {
       //{ field: 'estudioAlcanzado', headerName: 'Estudio Alcanzado', width: 210 },
     ];
 
-    const getSlots = async () => {
-      try {
-        const psicoEmail = localStorage.getItem('psicoEmail');
-        const responseData = await axios.get('https://careerwise-api.crossnox.dev/tutors/'+ psicoEmail +'/slots?available_only=true');
-        //const responseData = await axios.get('https://careerwise-api.crossnox.dev/tutors/tutor1@example.com/slots');
-        console.log(responseData);
-
-        for (let i = 0; i < slots.length; i++) {
-          const jsonObj = {
-            //nombre:slots[i].taken_by.name,
-            //email:slots[i].taken_by.email,
-            //edad:slots[i].taken_by.age,
-            //ubicacion:slots[i].taken_by.location,
-            //estudioAlcanzado:slots[i].taken_by.last_finished_degree,
-            fecha:slots[i].date,
-            horario:slots[i].hour
-          }
-          rows.push(jsonObj)
-        }
-
-      } catch (err) {
-        console.error(err)   
-      }
-    }
-
     const createSlots = async () => {  
       try {
-        //const date = format(date, 'yyyy-MM-dd')
+        const hour = Number(myHour);
+        const date = format(myDate, 'yyyy-MM-dd');
         const slotData = { date, hour };
-        const psicoEmail = localStorage.getItem('psicoEmail');
-        const responseData = await axios.post('https://careerwise-api.crossnox.dev/tutors/'+ psicoEmail +'/slots', slotData);
+        //const responseData = await axios.post('https://careerwise-api.crossnox.dev/tutors/'+ psicoEmail +'/slots', slotData);
+        const responseData = await axios.post('https://careerwise-api.crossnox.dev/tutors/tutor1@example.com/slots', slotData);
         console.log(responseData);
         if (responseData.status === 200 ) {
           window.location.href = '/psico';
@@ -107,6 +81,33 @@ const PsicoView: React.FC = () => {
       navigate('/signin/psico')
     };
 
+    useEffect(() => {
+      async function getSlots () {
+        try {
+          //const responseData = await axios.get('https://careerwise-api.crossnox.dev/tutors/'+ psicoEmail +'/slots?available_only=true');
+          const responseData = await axios.get('https://careerwise-api.crossnox.dev/tutors/tutor1@example.com/slots?available_only=false');
+          console.log(responseData);
+  
+          for (let i = 0; i < slots.length; i++) {
+            const jsonObj = {
+              //nombre:slots[i].taken_by.name,
+              //email:slots[i].taken_by.email,
+              //edad:slots[i].taken_by.age,
+              //ubicacion:slots[i].taken_by.location,
+              //estudioAlcanzado:slots[i].taken_by.last_finished_degree,
+              fecha:slots[i].date,
+              horario:slots[i].hour
+            }
+            rows.push(jsonObj)
+          }
+  
+        } catch (err) {
+          console.error(err)   
+        }
+      }
+      getSlots();
+    }, []);
+
   return (
     <>
     <div style={{ display: 'flex', flexDirection:'column', alignItems: 'center', justifyContent: 'center', height: '40vh' }}>
@@ -130,12 +131,12 @@ const PsicoView: React.FC = () => {
       <h1>Cargar nuevas consultas</h1>
       <div>
         <p>  Seleccione una fecha</p>
-        <DatePicker minDate={new Date()} selected={date} onChange={handleDate} required />
+        <DatePicker minDate={new Date()} selected={myDate} onChange={handleDate} required />
       </div>
       <br></br>
         <p>Seleccione una horario</p>
       <br></br>
-        <TimePicker value={hour} onChange={handleHour} minuteStep={30} defaultValue={Dayjs('07:00', 'HH')} format={'HH'}/>
+        <TimePicker value={myHour} onChange={handleHour} minuteStep={30} defaultValue={Dayjs('07:00', 'HH')} format={'HH'}/>
       <br></br>
       <br></br>
       <Button color="inherit" variant="contained" onClick={handleSubmit}> Cargar consulta </Button>
