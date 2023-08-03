@@ -38,7 +38,7 @@ const PsicoView: React.FC = () => {
       //{ field: 'nombre', headerName: 'name', width: 150 },
       //{ field: 'email', headerName: 'Email', width: 200 },
       //{ field: 'edad', headerName: 'Edad', width: 70 },
-      { field: 'fecha', headerName: 'Fecha', width: 110 },
+      { field: 'fecha', headerName: 'Fecha', width: 200 },
       { field: 'horario', headerName: 'Horario', width: 70 },
       //{ field: 'ubicacion', headerName: 'Ubicacion', width: 210 },
       //{ field: 'estudioAlcanzado', headerName: 'Estudio Alcanzado', width: 210 },
@@ -113,7 +113,7 @@ const PsicoView: React.FC = () => {
         <h1>
           Dashboard de consultas
         </h1>
-      <div style={{ height: 300, width: '50%', margin: 'auto' }}>
+      <div style={{ height: 300, width: '20%', margin: 'auto' }}>
         <DataGrid rows={rows} columns={columns} />
       </div>
       </div>
