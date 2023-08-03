@@ -18,7 +18,7 @@ const PsicoView: React.FC = () => {
     const psicoEmail = localStorage.getItem('psicoEmail');
     const [slots, setSlots] = useState<any[]>([]);
     const [myDate, setDate] = useState<Date>(new Date());
-    const [myHour, setHour] = useState();
+    const [myHour, setHour] = useState(7);
     const [rows, setRows] = useState<any[]>([]);
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -99,7 +99,8 @@ const PsicoView: React.FC = () => {
     }
 
     const handleHour = (newValue: any) => {
-      setHour(newValue);
+      const val = Number(newValue.target.value);
+      setHour(val);
     }
 
     const getBack = () => {
@@ -138,7 +139,7 @@ const PsicoView: React.FC = () => {
       <br></br>
         <p>Seleccione una horario</p>
       <br></br>
-      <TimePicker value={myHour} onChange={handleHour} minuteStep={30} defaultValue={Dayjs('07:00', 'HH')} format={'HH'}/>
+      <input type="number" min="0" max="23" value={myHour} onChange={handleHour} />
       <br></br>
       <br></br>
       <Button color="inherit" variant="contained" onClick={handleSubmit}> Cargar consulta </Button>
