@@ -43,19 +43,19 @@ const PsicoView: React.FC = () => {
 
     const getSlots = async () => {
       try {
-        //const responseData: [] = await axios.get('https://careerwise-api.crossnox.dev/tutors/'+ psicoEmail +'/slots?available_only=true');
-        const responseData: [] = await axios.get('https://careerwise-api.crossnox.dev/tutors/tutor1@example.com/slots?available_only=false');
-        console.log(responseData);
+        //const responseData = await axios.get('https://careerwise-api.crossnox.dev/tutors/'+ psicoEmail +'/slots?available_only=true');
+        const responseData = await axios.get('https://careerwise-api.crossnox.dev/tutors/tutor1@example.com/slots');
+        console.log(responseData.data);
 
-        for (let i = 0; i < responseData.length; i++) {
-          const jsonObj = {
-            //nombre:responseData[i].taken_by.name,
-            //email:responseData[i].taken_by.email,
-            //edad:responseData[i].taken_by.age,
-            //ubicacion:responseData[i].taken_by.location,
-            //estudioAlcanzado:responseData[i].taken_by.last_finished_degree,
-            fecha:responseData[i]['date'],
-            horario:responseData[i]['hour']
+        for (let i = 0; i < responseData.data.length; i++) {
+          let jsonObj = {
+            //nombre:responseData.data[i].taken_by.name,
+            //email:responseData.data[i].taken_by.email,
+            //edad:responseData.data[i].taken_by.age,
+            //ubicacion:responseData.data[i].taken_by.location,
+            //estudioAlcanzado:responseData.data[i].taken_by.last_finished_degree,
+            fecha:responseData.data[i]['date'],
+            horario:responseData.data[i]['hour']
           }
           rows.push(jsonObj)
         }
