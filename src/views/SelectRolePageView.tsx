@@ -70,7 +70,7 @@ const RoleSelectionPage = () => {
               </ImageContainer>
             </Grid>
             <Grid item xs={6}>
-              <ImageContainer to="/signup/faculty">
+              <ImageContainer to="/login/faculty">
                 <img src={facultyImage} alt="Faculty Staff" />
                 <Typography variant="h6" align="center" gutterBottom>
                   Administrador de Facultad
