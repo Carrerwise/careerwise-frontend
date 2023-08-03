@@ -20,6 +20,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import {ListItems}  from './listitems';
 import Careers from './Careers';
 import UploadCareerForm from './UploadCareerView';
+import UpdateCareerForm from './UpdateCareerForm';
 
 function Copyright(props: any) {
     return (
@@ -86,6 +87,7 @@ const AppBar = styled(MuiAppBar, {
 const defaultTheme = createTheme();
 
 export default function FacultyAdminDashboard() {
+  const [showUpdateForm, setUpdateForm] = React.useState(0);
   const [showForm, setShowForm] = React.useState(false);
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
@@ -164,12 +166,15 @@ export default function FacultyAdminDashboard() {
               {/* Careers */}
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                    {showForm ? (
-                    /* Render the upload form component here */
-                    <UploadCareerForm />
+                {showForm ? (
+                        /* Render the upload form component here */
+                        <UploadCareerForm />
+                    ) : showUpdateForm > 0 ? (
+                        /* Render the update form component here */
+                        <UpdateCareerForm setUpdateCareer={setUpdateForm} careerId={showUpdateForm}/>
                     ) : (
-                    /* Render the careers component here */
-                    <Careers/>
+                        /* Render the dashboard or other content here */
+                        <Careers setUpdateCareer={setUpdateForm} />
                     )}
                 </Paper>
               </Grid>

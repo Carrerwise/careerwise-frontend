@@ -25,8 +25,10 @@ interface Career {
   private: boolean;
   chaside_letter: string;
 }
-
-export default function Careers() {
+interface CareersProps {
+  setUpdateCareer: React.Dispatch<React.SetStateAction<number>>;
+}
+export const Careers: React.FC<CareersProps> = ({ setUpdateCareer }) => {
   const [careers, setCareers] = React.useState<Career[]>([]);
 
   React.useEffect(() => {
@@ -56,8 +58,7 @@ export default function Careers() {
   const handleSetCareers = () => {
     const userEmail = localStorage.getItem('userEmail');
 
-    //axios.get(`https://careerwise-api.crossnox.dev/admins/${userEmail}/careers`) // Replace with your API endpoint
-    axios.get(`https://careerwise-api.crossnox.dev/careers`) // Replace with your API endpoint
+    axios.get(`https://careerwise-api.crossnox.dev/admins/${userEmail}/careers`)
     .then(response => {
         setCareers(response.data);
       })
@@ -68,6 +69,7 @@ export default function Careers() {
 
   const handleUpdateCareer = (id: number) => {
     console.log(id);
+    setUpdateCareer(id)
   };
 
   return (
@@ -117,3 +119,5 @@ export default function Careers() {
     </React.Fragment>
   );
 }
+
+export default Careers;
