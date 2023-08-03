@@ -1,15 +1,14 @@
 import React, { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Button from '@mui/material/Button';
-import { Card, CardHeader, CardBody, CardFooter, Heading, Text } from '@chakra-ui/react';
-import { FaCheck } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
 
 import '../styles/Payment.css';
-import { Header } from '../components/Header';
 import axios, { AxiosRequestConfig } from 'axios';
 
 const PaymentSuccessView: React.FC = () => {
-  const navigate = useNavigate();
   
   function useQuery() {
     const { search } = useLocation();
@@ -39,22 +38,23 @@ const PaymentSuccessView: React.FC = () => {
   }, [query]);
 
   return (
-    <><Header /><div className="view">
-      <Card align="center" className="card">
-        <CardHeader>
-          <Heading as="h2" color={'black'}> ¡Pago éxitoso! </Heading>
-          <span style={{ color: 'green', fontSize: 30, margin: 10}}>
-            <FaCheck />
-          </span>
-        </CardHeader>
-        <CardBody>
-          <Text >¿Qué estas esperando para ver los resultados?</Text>
-        </CardBody>
-        <CardFooter>
-          <Button color="secondary" variant="contained" onClick={() => navigate('/results')}>Ver resultados</Button>
-        </CardFooter>
-      </Card>
-    </div></>
+    <Container maxWidth="sm">
+      <Typography variant="h4" align="center" gutterBottom>
+        Thank you for your payment!
+      </Typography>
+      <Typography variant="body1" align="center" paragraph>
+        Your career boosting has been successfully processed.
+      </Typography>
+      <Button
+        component={Link}
+        to="/faculty" // Adjust the route to your faculty page
+        variant="contained"
+        color="primary"
+        fullWidth
+      >
+        Back to Faculty Page
+      </Button>
+    </Container>
   );
 };
 
