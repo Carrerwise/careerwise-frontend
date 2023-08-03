@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from 'react';
-//import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
 import Button from '@mui/material/Button';
-//import { Table, Thead, Tbody, Tfoot, Tr, Th, Td, TableCaption, TableContainer, Heading } from '@chakra-ui/react';
-//import { Header } from '../components/Header';
-//import { format } from 'date-fns';
-//import { FaClock, FaTimes } from 'react-icons/fa';
 import Dayjs from 'dayjs';
 import { TimePicker } from 'antd';
 import { DataGrid } from '@mui/x-data-grid';
@@ -19,11 +14,10 @@ import '../styles/TimePicker.css';
 
 
 const PsicoView: React.FC = () => {
-    const psicoEmail = localStorage.getItem('psicoEmail');
     const [slots, setSlots] = useState<any[]>([]);
     const [date, setDate] = useState<Date | null>();
     const [hour, setHour] = useState();
-    const [rows, setRows] = useState([]);
+    const [rows, setRows] = useState<any[]>([]);
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
     const handleButtonClick = () => {
@@ -38,42 +32,37 @@ const PsicoView: React.FC = () => {
 
     useEffect(() => {
       getSlots();
-      const rows = getRows();
     }, []);
  
     const columns = [
-      { field: 'nombre', headerName: 'name', width: 150 },
-      { field: 'email', headerName: 'Email', width: 200 },
-      { field: 'edad', headerName: 'Edad', width: 70 },
+      //{ field: 'nombre', headerName: 'name', width: 150 },
+      //{ field: 'email', headerName: 'Email', width: 200 },
+      //{ field: 'edad', headerName: 'Edad', width: 70 },
       { field: 'fecha', headerName: 'Fecha', width: 110 },
       { field: 'horario', headerName: 'Horario', width: 70 },
-      { field: 'ubicacion', headerName: 'Ubicacion', width: 210 },
-      { field: 'estudioAlcanzado', headerName: 'Estudio Alcanzado', width: 210 },
+      //{ field: 'ubicacion', headerName: 'Ubicacion', width: 210 },
+      //{ field: 'estudioAlcanzado', headerName: 'Estudio Alcanzado', width: 210 },
     ];
-
-    const getRows = () => {
-      const row = [];
-      for (let i = 0; i < slots.length; i++) {
-        const jsonObj = {
-          nombre:slots[i].taken_by.name,
-          email:slots[i].taken_by.email,
-          edad:slots[i].taken_by.age,
-          fecha:slots[i].date,
-          horario:slots[i].hour,
-          ubicacion:slots[i].taken_by.location,
-          estudioAlcanzado:slots[i].taken_by.last_finished_degree
-        }
-        row.push(jsonObj)
-      }
-      //setRows(row);
-      return row;
-    }
 
     const getSlots = async () => {
       try {
-        const responseData = await axios.get('https://careerwise-api.crossnox.dev/tutors/'+ psicoEmail +'/slots');
+        const psicoEmail = localStorage.getItem('psicoEmail');
+        const responseData = await axios.get('https://careerwise-api.crossnox.dev/tutors/'+ psicoEmail +'/slots?available_only=true');
         //const responseData = await axios.get('https://careerwise-api.crossnox.dev/tutors/tutor1@example.com/slots');
-        setSlots(responseData.data);
+        console.log(responseData);
+
+        for (let i = 0; i < slots.length; i++) {
+          const jsonObj = {
+            //nombre:slots[i].taken_by.name,
+            //email:slots[i].taken_by.email,
+            //edad:slots[i].taken_by.age,
+            //ubicacion:slots[i].taken_by.location,
+            //estudioAlcanzado:slots[i].taken_by.last_finished_degree,
+            fecha:slots[i].date,
+            horario:slots[i].hour
+          }
+          rows.push(jsonObj)
+        }
 
       } catch (err) {
         console.error(err)   
@@ -84,8 +73,15 @@ const PsicoView: React.FC = () => {
       try {
         //const date = format(date, 'yyyy-MM-dd')
         const slotData = { date, hour };
+        const psicoEmail = localStorage.getItem('psicoEmail');
         const responseData = await axios.post('https://careerwise-api.crossnox.dev/tutors/'+ psicoEmail +'/slots', slotData);
-        console.log(responseData);  
+        console.log(responseData);
+        if (responseData.status === 200 ) {
+          window.location.href = '/psico';
+          handleButtonClick();
+        } else {
+          throw new Error('Create Slot Failed');
+        }
       } catch (err) {
           console.error(err)
       }
@@ -94,8 +90,6 @@ const PsicoView: React.FC = () => {
     const handleSubmit = async () => {
         try {
           createSlots();
-          handleButtonClick();
-          //TODO:
         } catch (err) {
             console.error(err)
         }
@@ -123,45 +117,6 @@ const PsicoView: React.FC = () => {
         <DataGrid rows={rows} columns={columns} />
       </div>
       </div>
-      {/*
-      <table>
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Email</th>
-            <th>Edad</th>
-            <th>Fecha</th>
-            <th>Horario</th>
-            <th>Ubicacion</th>
-            <th>Estudio Alcanzado</th>
-          </tr>
-        </thead>
-        <tbody>
-          
-          <tr>
-            <td>NombreEjemplo</td>
-            <td>Ejemplo@example.com</td>
-            <td>25</td>
-            <td>2023-07-29</td>
-            <td>11</td>
-            <td>Mendoza 2248</td>
-            <td>primary_school</td>
-          </tr>
-          
-            {slots.map((item) => (
-            <tr key={item.id}>
-            <td>{item.taken_by.name}</td>
-            <td>{item.taken_by.email}</td>
-            <td>{item.taken_by.age}</td>
-            <td>{item.date}</td>
-            <td>{item.hour}</td>
-            <td>{item.taken_by.location}</td>
-            <td>{item.taken_by.last_finished_degree}</td>
-          </tr>
-          ))}
-        </tbody>
-      </table>
-      */}
     <div
       style={{
         display: "flex",
@@ -169,6 +124,7 @@ const PsicoView: React.FC = () => {
         alignItems: "center",
         justifyContent: "center",
         height: "40vh",
+        border: "1px solid"
       }}
     >
       <h1>Cargar nuevas consultas</h1>

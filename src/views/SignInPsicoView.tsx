@@ -1,10 +1,9 @@
-import React, { FormEvent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useState } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { Link } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import axios from 'axios';
 
@@ -32,19 +31,35 @@ const Root = styled('div')(({ theme }) => ({
     background: theme.palette.grey[100],
     boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
   }));
-  
+
+  interface LoginData {
+    email: string;
+    password: string;
+  }
+    
+
 const SingInPiscoView: React.FC = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [tutorData, setTutorData] = useState<LoginData>({
+      email: '',
+      password: '',
+    });
+
+    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+      const { name, value } = event.target;
+      setTutorData((prevData) => ({ ...prevData, [name]: value }));
+    };
 
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       try {
-        const tutorData = { email, password };
         const responseData = await axios.post('https://careerwise-api.crossnox.dev/tutors/login', tutorData);
         console.log(responseData);
-        localStorage.setItem('psicoEmail', email);
-
+        if (responseData.status === 200 ) {
+          localStorage.setItem('psicoEmail', tutorData.email);
+          window.location.href = '/psico';
+        } else {
+          throw new Error('SignIn Failed');
+        }
       } catch (err) {
           console.error(err)
       }
@@ -59,30 +74,30 @@ const SingInPiscoView: React.FC = () => {
           </Typography>
           <LoginForm onSubmit={handleSubmit}>
             <TextField
+              name="email"
               label="Email"
               type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={tutorData.email}
+              onChange={handleChange}
               variant="outlined"
               margin="normal"
               required
               fullWidth
             />
             <TextField
+              name="password"
               label="Password"
               type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={tutorData.password}
+              onChange={handleChange}
               variant="outlined"
               margin="normal"
               required
               fullWidth
             />
-            <Link to="/psico" style={{ textDecoration: 'none' }}>      
-              <Button type="submit" variant="contained" color="primary" fullWidth>
-                Sign In
-              </Button>
-            </Link>
+            <Button type="submit" variant="contained" color="primary" fullWidth>
+              Sign In
+            </Button>
           </LoginForm>
         </Container>
       </Root>
