@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Button from '@mui/material/Button';
-import { Card, CardHeader, CardBody, CardFooter, Heading, Text } from '@chakra-ui/react';
-import { FaExclamationCircle  } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
 
 import '../styles/Payment.css';
-import { Header } from '../components/Header';
 import axios, { AxiosRequestConfig } from 'axios';
 
 const PaymentFailureView: React.FC = () => {
@@ -38,23 +38,23 @@ const PaymentFailureView: React.FC = () => {
   }, [navigate, query]);
 
   return (
-    <><Header /><div className="view">
-      <Card align="center" className="card">
-        <CardHeader>
-          <Heading as="h2" color={'black'}> ¡Error al realizar el pago! </Heading>
-          <span style={{ color: 'red', fontSize: 33, margin: 10}}>
-            <FaExclamationCircle  />
-          </span>
-        </CardHeader>
-        <CardBody>
-          <Text>El pago no se pudo realizar correctamente</Text>
-          <Text>Intente más tarde</Text>
-        </CardBody>
-        <CardFooter>
-          <Button color="secondary" variant="contained" onClick={() => navigate('/')}>Volver</Button>
-        </CardFooter>
-      </Card>
-    </div></>
+    <Container maxWidth="sm">
+      <Typography variant="h4" align="center" gutterBottom>
+        Payment Unsuccessful
+      </Typography>
+      <Typography variant="body1" align="center" paragraph>
+        We apologize, but there was an issue processing your payment.
+      </Typography>
+      <Button
+        component={Link}
+        to="/faculty" // Adjust the route to your faculty page
+        variant="contained"
+        color="primary"
+        fullWidth
+      >
+        Back to Faculty Page
+      </Button>
+    </Container>
   );
 };
 
