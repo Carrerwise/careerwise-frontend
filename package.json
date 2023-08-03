@@ -14,13 +14,7 @@
     "@mui/icons-material": "^5.14.3",
     "@mui/lab": "^5.0.0-alpha.137",
     "@mui/material": "^5.14.3",
-<<<<<<< HEAD
-    "@mui/styled-engine-sc": "^5.12.0",
     "@mui/x-data-grid": "^6.10.2",
-    "@mui/x-date-pickers": "^6.10.2",
-    "@syncfusion/ej2-react-calendars": "^22.2.5",
-=======
->>>>>>> 5e2bfb2463224db396d37ed71f92eb597e90d9a5
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
