@@ -42,13 +42,38 @@ const PsicoView: React.FC = () => {
       //{ field: 'estudioAlcanzado', headerName: 'Estudio Alcanzado', width: 210 },
     ];
 
+    const getSlots = async () => {
+      try {
+        //const responseData: [] = await axios.get('https://careerwise-api.crossnox.dev/tutors/'+ psicoEmail +'/slots?available_only=true');
+        const responseData: [] = await axios.get('https://careerwise-api.crossnox.dev/tutors/tutor1@example.com/slots?available_only=false');
+        console.log(responseData);
+
+        for (let i = 0; i < responseData.length; i++) {
+          const jsonObj = {
+            //nombre:responseData[i].taken_by.name,
+            //email:responseData[i].taken_by.email,
+            //edad:responseData[i].taken_by.age,
+            //ubicacion:responseData[i].taken_by.location,
+            //estudioAlcanzado:responseData[i].taken_by.last_finished_degree,
+            fecha:responseData[i]['date'],
+            horario:responseData[i]['hour']
+          }
+          rows.push(jsonObj)
+        }
+        setRows(rows)
+
+      } catch (err) {
+        console.error(err)   
+      }
+    }
+
     const createSlots = async () => {  
       try {
         const hour = Number(myHour);
         const date = format(myDate, 'yyyy-MM-dd');
         const slotData = { date, hour };
-        //const responseData = await axios.post('https://careerwise-api.crossnox.dev/tutors/'+ psicoEmail +'/slots', slotData);
-        const responseData = await axios.post('https://careerwise-api.crossnox.dev/tutors/tutor1@example.com/slots', slotData);
+        const responseData = await axios.post('https://careerwise-api.crossnox.dev/tutors/'+ psicoEmail +'/slots', slotData);
+        //const responseData = await axios.post('https://careerwise-api.crossnox.dev/tutors/tutor1@example.com/slots', slotData);
         console.log(responseData);
         if (responseData.status === 200 ) {
           window.location.href = '/psico';
@@ -82,31 +107,8 @@ const PsicoView: React.FC = () => {
     };
 
     useEffect(() => {
-      async function getSlots () {
-        try {
-          //const responseData = await axios.get('https://careerwise-api.crossnox.dev/tutors/'+ psicoEmail +'/slots?available_only=true');
-          const responseData = await axios.get('https://careerwise-api.crossnox.dev/tutors/tutor1@example.com/slots?available_only=false');
-          console.log(responseData);
-  
-          for (let i = 0; i < slots.length; i++) {
-            const jsonObj = {
-              //nombre:slots[i].taken_by.name,
-              //email:slots[i].taken_by.email,
-              //edad:slots[i].taken_by.age,
-              //ubicacion:slots[i].taken_by.location,
-              //estudioAlcanzado:slots[i].taken_by.last_finished_degree,
-              fecha:slots[i].date,
-              horario:slots[i].hour
-            }
-            rows.push(jsonObj)
-          }
-  
-        } catch (err) {
-          console.error(err)   
-        }
-      }
       getSlots();
-    }, []);
+    }, [getSlots]);
 
   return (
     <>
@@ -136,7 +138,7 @@ const PsicoView: React.FC = () => {
       <br></br>
         <p>Seleccione una horario</p>
       <br></br>
-        <TimePicker value={myHour} onChange={handleHour} minuteStep={30} defaultValue={Dayjs('07:00', 'HH')} format={'HH'}/>
+      <TimePicker value={myHour} onChange={handleHour} minuteStep={30} defaultValue={Dayjs('07:00', 'HH')} format={'HH'}/>
       <br></br>
       <br></br>
       <Button color="inherit" variant="contained" onClick={handleSubmit}> Cargar consulta </Button>
