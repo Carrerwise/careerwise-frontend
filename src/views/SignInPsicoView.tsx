@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 
 const Root = styled('div')(({ theme }) => ({
@@ -98,6 +99,11 @@ const SingInPiscoView: React.FC = () => {
             <Button type="submit" variant="contained" color="primary" fullWidth>
               Sign In
             </Button>
+            <Link to="/signup/psico" style={{  marginTop: 5,textDecoration: 'none', width: '100%' }}>
+            <Button variant="outlined" color="primary" fullWidth>
+              Sign Up
+            </Button>
+          </Link>
           </LoginForm>
         </Container>
       </Root>

@@ -14,6 +14,7 @@ import { MyContext } from './contexts/MyContext';
 import PaymentFailureView from './views/FailurePaymentView';
 import LoginFacultyAdmin from './views/LoginFacultyAdmin';
 import SignUpFacultyAdmin from './views/SignUpFacultyAdmin';
+import SignUpPsicoView from './views/SignUpPsicoView';
 import AdminDashboard from './views/AdminDashboard';
 import BoostCareerPage from './views/BoostCareerView';
 
@@ -29,6 +30,7 @@ const App: React.FC = () => {
         <Route path="/select-role" element={<SelectRolePageView />} />
         <Route path="/login/faculty" element={<LoginFacultyAdmin />} />
         <Route path="/signup/faculty" element={<SignUpFacultyAdmin />} />
+        <Route path="/signup/psico" element={<SignUpPsicoView />} />
         <Route path="/signin/psico" element={<SignInPsicoView />} />
         <Route path="/psico" element={<PsicoView />} />
         <Route path="/faculty" element={<AdminDashboard />} />
