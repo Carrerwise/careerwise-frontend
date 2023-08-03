@@ -13,10 +13,16 @@ import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 import '../styles/Modal.css';
 import '../styles/TimePicker.css';
 
+type TutorSlot = {
+	date: Date,
+	hour: Number,
+	tutor_id: String,
+	take: boolean,
+	taken_by: any
+};
 
 const PsicoView: React.FC = () => {
     const psicoEmail = localStorage.getItem('psicoEmail');
-    const [slots, setSlots] = useState<any[]>([]);
     const [myDate, setDate] = useState<Date>(new Date());
     const [myHour, setHour] = useState(7);
     const [rows, setRows] = useState<any[]>([]);
@@ -25,13 +31,13 @@ const PsicoView: React.FC = () => {
     const handleButtonClick = () => {
       setModalIsOpen(true);
     };
-  
+
     const handleCloseModal = () => {
       setModalIsOpen(false);
     };
 
     const navigate = useNavigate();
- 
+
     const columns = [
       //{ field: 'nombre', headerName: 'name', width: 150 },
       //{ field: 'email', headerName: 'Email', width: 200 },
@@ -43,31 +49,18 @@ const PsicoView: React.FC = () => {
     ];
 
     const getSlots = async () => {
-      try {
-        //const responseData: [] = await axios.get('https://careerwise-api.crossnox.dev/tutors/'+ psicoEmail +'/slots?available_only=true');
-        const responseData: [] = await axios.get('https://careerwise-api.crossnox.dev/tutors/tutor1@example.com/slots?available_only=false');
-        console.log(responseData);
+        axios.get('https://careerwise-api.crossnox.dev/tutors/'+ psicoEmail +'/slots?available_only=true').then(function(responseData) {
+			const rowsData = (responseData.data as TutorSlot[]).map((a) => {
+				return {'fecha': a.date, 'horario': a.hour, 'id': `${a.date}::${a.hour}`}
+			});
+			setRows(rowsData);
+        }).catch(function(err) {
+			console.error(err);
+		})
+    };
 
-        for (let i = 0; i < responseData.length; i++) {
-          const jsonObj = {
-            //nombre:responseData[i].taken_by.name,
-            //email:responseData[i].taken_by.email,
-            //edad:responseData[i].taken_by.age,
-            //ubicacion:responseData[i].taken_by.location,
-            //estudioAlcanzado:responseData[i].taken_by.last_finished_degree,
-            fecha:responseData[i]['date'],
-            horario:responseData[i]['hour']
-          }
-          rows.push(jsonObj)
-        }
-        setRows(rows)
 
-      } catch (err) {
-        console.error(err)   
-      }
-    }
-
-    const createSlots = async () => {  
+    const createSlots = async () => {
       try {
         const hour = Number(myHour);
         const date = format(myDate, 'yyyy-MM-dd');
@@ -75,7 +68,7 @@ const PsicoView: React.FC = () => {
         const responseData = await axios.post('https://careerwise-api.crossnox.dev/tutors/'+ psicoEmail +'/slots', slotData);
         //const responseData = await axios.post('https://careerwise-api.crossnox.dev/tutors/tutor1@example.com/slots', slotData);
         console.log(responseData);
-        if (responseData.status === 200 ) {
+        if (responseData.status === 201 ) {
           window.location.href = '/psico';
           handleButtonClick();
         } else {
@@ -85,7 +78,7 @@ const PsicoView: React.FC = () => {
           console.error(err)
       }
     }
-    
+
     const handleSubmit = async () => {
         try {
           createSlots();
@@ -107,9 +100,9 @@ const PsicoView: React.FC = () => {
       navigate('/signin/psico')
     };
 
-    useEffect(() => {
-      getSlots();
-    }, [getSlots]);
+	useEffect(() => {
+    	getSlots();
+    }, []);
 
   return (
     <>
