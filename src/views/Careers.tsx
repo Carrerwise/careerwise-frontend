@@ -35,8 +35,7 @@ export const Careers: React.FC<CareersProps> = ({ setUpdateCareer }) => {
     // Fetch career data from the API
     const userEmail = localStorage.getItem('userEmail');
 
-    //axios.get(`https://careerwise-api.crossnox.dev/admins/${userEmail}/careers`) // Replace with your API endpoint
-    axios.get(`https://careerwise-api.crossnox.dev/careers`) // Replace with your API endpoint
+    axios.get(`https://careerwise-api.crossnox.dev/admins/${userEmail}/careers`)
     .then(response => {
         setCareers(response.data);
       })

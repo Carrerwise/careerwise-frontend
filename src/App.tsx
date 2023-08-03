@@ -16,7 +16,6 @@ import LoginFacultyAdmin from './views/LoginFacultyAdmin';
 import SignUpFacultyAdmin from './views/SignUpFacultyAdmin';
 import AdminDashboard from './views/AdminDashboard';
 import BoostCareerPage from './views/BoostCareerView';
-import UploadCareerPage from './views/UploadCareerView';
 
 
 const App: React.FC = () => {
@@ -33,7 +32,6 @@ const App: React.FC = () => {
         <Route path="/signin/psico" element={<SignInPsicoView />} />
         <Route path="/psico" element={<SignInPsicoView />} />
         <Route path="/faculty" element={<AdminDashboard />} />
-        <Route path="/upload-career" element={<UploadCareerPage />} />
         <Route path="/boost-career/:careerId" element={<BoostCareerPage />} />
         <Route path="/test" element={<TestView />} />
         <Route path="/results" element={<SurveyView />} />
