@@ -4,6 +4,9 @@ import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import WelcomeView from './views/WelcomeView';
 import SelectRolePageView from './views/SelectRolePageView';
 
+import SignUpForm from './views/SignUpView';
+import SignInPsicoView from './views/SignInPsicoView';
+import PsicoView from './views/PsicoView';
 import SurveyView from './views/TestResultsView';
 import TestView from './views/TestView';
 import PaymentSuccessView from './views/SuccessPaymentView';
@@ -26,6 +29,8 @@ const App: React.FC = () => {
         <Route path="/select-role" element={<SelectRolePageView />} />
         <Route path="/login/faculty" element={<LoginFacultyAdmin />} />
         <Route path="/signup/faculty" element={<SignUpFacultyAdmin />} />
+        <Route path="/signin/psico" element={<SignInPsicoView />} />
+        <Route path="/psico" element={<PsicoView />} />
         <Route path="/faculty" element={<AdminDashboard />} />
         <Route path="/boost-career/:careerId" element={<BoostCareerPage />} />
         <Route path="/test" element={<TestView />} />

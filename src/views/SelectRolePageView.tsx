@@ -62,7 +62,7 @@ const RoleSelectionPage = () => {
           </Typography>
           <Grid container spacing={2} justifyContent="center">
             <Grid item xs={6}>
-              <ImageContainer to="/login/psychologist">
+              <ImageContainer to="/signin/psico">
                 <img src={psychologistImage} alt="Psychologist" />
                 <Typography variant="h6" align="center" gutterBottom>
                   Psicologo
