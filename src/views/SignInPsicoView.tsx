@@ -6,8 +6,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
-import { useNavigate } from 'react-router';
-import axios, { AxiosRequestConfig } from 'axios';
+import axios from 'axios';
 
 
 const Root = styled('div')(({ theme }) => ({
@@ -35,7 +34,6 @@ const Root = styled('div')(({ theme }) => ({
   }));
   
 const SingInPiscoView: React.FC = () => {
-    const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -45,7 +43,6 @@ const SingInPiscoView: React.FC = () => {
         const tutorData = { email, password };
         const responseData = await axios.post('https://careerwise-api.crossnox.dev/tutors/login', tutorData);
         console.log(responseData);
-        localStorage.setItem('psicoId', responseData.data);
         localStorage.setItem('psicoEmail', email);
 
       } catch (err) {

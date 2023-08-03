@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
 import Button from '@mui/material/Button';
-import { Table, Thead, Tbody, Tfoot, Tr, Th, Td, TableCaption, TableContainer, Heading } from '@chakra-ui/react';
-import { Header } from '../components/Header';
-import { format } from 'date-fns';
-import { FaClock, FaTimes } from 'react-icons/fa';
+//import { Table, Thead, Tbody, Tfoot, Tr, Th, Td, TableCaption, TableContainer, Heading } from '@chakra-ui/react';
+//import { Header } from '../components/Header';
+//import { format } from 'date-fns';
+//import { FaClock, FaTimes } from 'react-icons/fa';
 import Dayjs from 'dayjs';
 import { TimePicker } from 'antd';
 import { DataGrid } from '@mui/x-data-grid';
@@ -19,16 +19,12 @@ import '../styles/TimePicker.css';
 
 
 const PsicoView: React.FC = () => {
-    const psicoId = localStorage.getItem('psicoId');
     const psicoEmail = localStorage.getItem('psicoEmail');
     const [slots, setSlots] = useState<any[]>([]);
     const [date, setDate] = useState<Date | null>();
     const [hour, setHour] = useState();
     const [rows, setRows] = useState([]);
     const [modalIsOpen, setModalIsOpen] = useState(false);
-
-    const minTime: Date = new Date("01/02/2021 00:00");
-    const maxTime: Date = new Date("01/02/2021 23:59");
 
     const handleButtonClick = () => {
       setModalIsOpen(true);
@@ -75,8 +71,8 @@ const PsicoView: React.FC = () => {
 
     const getSlots = async () => {
       try {
-        const responseData = await axios.get('https://careerwise-api.crossnox.dev/tutors/'+ psicoId +'/slots');
-        //const responseData = await axios.get('https://careerwise-api.crossnox.dev/tutors/1/slots');
+        const responseData = await axios.get('https://careerwise-api.crossnox.dev/tutors/'+ psicoEmail +'/slots');
+        //const responseData = await axios.get('https://careerwise-api.crossnox.dev/tutors/tutor1@example.com/slots');
         setSlots(responseData.data);
 
       } catch (err) {
@@ -88,7 +84,7 @@ const PsicoView: React.FC = () => {
       try {
         //const date = format(date, 'yyyy-MM-dd')
         const slotData = { date, hour };
-        const responseData = await axios.post('https://careerwise-api.crossnox.dev/tutors/'+ psicoId +'/slots', slotData);
+        const responseData = await axios.post('https://careerwise-api.crossnox.dev/tutors/'+ psicoEmail +'/slots', slotData);
         console.log(responseData);  
       } catch (err) {
           console.error(err)
@@ -183,7 +179,7 @@ const PsicoView: React.FC = () => {
       <br></br>
         <p>Seleccione una horario</p>
       <br></br>
-        <TimePicker value={hour} onChange={handleHour} minuteStep={30} defaultValue={Dayjs('07:00', 'HH:mm')} format={'HH:mm'}/>
+        <TimePicker value={hour} onChange={handleHour} minuteStep={30} defaultValue={Dayjs('07:00', 'HH')} format={'HH'}/>
       <br></br>
       <br></br>
       <Button color="inherit" variant="contained" onClick={handleSubmit}> Cargar consulta </Button>
