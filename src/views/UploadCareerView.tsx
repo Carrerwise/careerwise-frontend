@@ -67,7 +67,7 @@ const UploadCareerForm: React.FC = () => {
     try {
         const userEmail = localStorage.getItem('userEmail')
         const response = await axios.post<Career>(
-            `https://careerwise-api.crossnox.dev/admins/${userEmail}/careers`,
+            `https://careerwise-api.crossnox.dev/admins/${userEmail}/careers/`,
             careerData
         );
 
