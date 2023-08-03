@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
 import Button from '@mui/material/Button';
-import Dayjs from 'dayjs';
 import { format } from "date-fns";
 import { TimePicker } from 'antd';
 import { DataGrid } from '@mui/x-data-grid';
@@ -59,7 +58,6 @@ const PsicoView: React.FC = () => {
 		})
     };
 
-
     const createSlots = async () => {
       try {
         const hour = Number(myHour);
@@ -110,7 +108,7 @@ const PsicoView: React.FC = () => {
         <h1>
           Dashboard de consultas
         </h1>
-      <div style={{ height: 300, width: '20%', margin: 'auto' }}>
+      <div style={{ height: 300, width: '25%', margin: 'auto' }}>
         <DataGrid rows={rows} columns={columns} />
       </div>
       </div>
@@ -120,7 +118,7 @@ const PsicoView: React.FC = () => {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        height: "40vh",
+        height: "50vh",
         border: "1px solid"
       }}
     >
