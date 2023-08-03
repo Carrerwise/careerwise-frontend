@@ -74,7 +74,7 @@ const PsicoView: React.FC = () => {
         const responseData = await axios.post('https://careerwise-api.crossnox.dev/tutors/'+ psicoEmail +'/slots', slotData);
         //const responseData = await axios.post('https://careerwise-api.crossnox.dev/tutors/tutor1@example.com/slots', slotData);
         console.log(responseData);
-        if (responseData.status === 200 ) {
+        if (responseData.status === 201 ) {
           window.location.href = '/psico';
           handleButtonClick();
         } else {
@@ -116,7 +116,7 @@ const PsicoView: React.FC = () => {
         <h1>
           Dashboard de consultas
         </h1>
-      <div style={{ height: 300, width: '20%', margin: 'auto' }}>
+      <div style={{ height: 300, width: '25%', margin: 'auto' }}>
         <DataGrid rows={rows} columns={columns} />
       </div>
       </div>
@@ -126,7 +126,7 @@ const PsicoView: React.FC = () => {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        height: "40vh",
+        height: "50vh",
         border: "1px solid"
       }}
     >
